@@ -23,6 +23,8 @@ public class ShipMenu : MonoBehaviour
 
     private bool FirstSelectedChosen = false;
 
+    private float positionScale = 0.0025f;
+
     public float ButtonYStartPos = 125f;
 
     // Start is called before the first frame update
@@ -58,8 +60,8 @@ public class ShipMenu : MonoBehaviour
         Text choiceText = choice.GetComponentInChildren<Text>();
 
         choice.transform.SetParent(ListContent.transform, false);
-        var position = choice.GetComponent<RectTransform>().anchoredPosition;
-        position.y = buttonYPos;
+        var position = choice.transform.localPosition;
+        position.y = buttonYPos * positionScale;
         choice.transform.position = position;
         choice.onClick.AddListener(onClick);
         choiceText.text = text;
