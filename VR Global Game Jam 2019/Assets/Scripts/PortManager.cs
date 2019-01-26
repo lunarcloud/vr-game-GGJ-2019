@@ -13,10 +13,16 @@ public class PortManager : MonoBehaviour
 
     public Material sky;
 
+    public GameObject[] vendorLights;
+
     private void Awake()
     {
+        vendorLights = GameObject.FindGameObjectsWithTag("VendorLights");
+        foreach (var light in vendorLights)
+        {
+            light.SetActive(false);
+        }
         BlackoutCover.FadeOut();
-
     }
 
     // Start is called before the first frame update
@@ -31,6 +37,16 @@ public class PortManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void EnableVendorLight(int index)
+    {
+        vendorLights[index].SetActive(true);
+    }
+
+    public void DisableVendorLight(int index)
+    {
+        vendorLights[index].SetActive(false);
     }
 
     public void BackToShip()
