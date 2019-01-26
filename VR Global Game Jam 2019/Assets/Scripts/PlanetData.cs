@@ -123,7 +123,7 @@ public class PlanetData
                 ret.SetPixel(tx, ty, new Color(terrain, terrain, terrain));
             }
         }
-
+        ret.Apply();
         return ret;
     }
 }

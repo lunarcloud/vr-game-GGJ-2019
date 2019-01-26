@@ -10,8 +10,6 @@ public class ShipMenu : MonoBehaviour
 {
     private GameDataManager DataManager;
 
-    public Image PlanetImage;
-
     public GameObject PlanetPreview;
 
     public Text DetailsText;
@@ -31,6 +29,8 @@ public class ShipMenu : MonoBehaviour
     private PlanetData selectedPlanet;
     
     public PanelFade BlackoutCover;
+
+    public float GlobeSpeed = 30f;
     
     private void Awake()
     {
@@ -60,7 +60,9 @@ public class ShipMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlanetPreview.transform.Rotate(Vector3.up, GlobeSpeed * Time.deltaTime);
+
+
     }
 
     public void LoadPlanetData(PlanetData data) {
@@ -79,13 +81,9 @@ public class ShipMenu : MonoBehaviour
             ;
 
         PlanetPreview.SetActive(true);
-        /*
-        Texture runtimeTexture = (Texture)Resources.Load("earth");
-        Material runtimeMaterial = new Material(Shader.Find("VertexLit"));
-        runtimeMaterial.SetTexture("_MainTex", runtimeTexture);
 
-        PlanetPreview.GetComponent<Renderer>().material = runtimeMaterial;
-        */
+        var worldTexture = data.CreateWorldTexture();
+        PlanetPreview.GetComponent<Renderer>().material.mainTexture = worldTexture;
     }
 
     public void AddListItem(string text, float buttonYPos, bool isHighlighted, UnityEngine.Events.UnityAction onClick)
