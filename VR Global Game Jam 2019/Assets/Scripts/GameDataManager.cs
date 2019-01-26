@@ -17,7 +17,8 @@ public class GameDataManager : MonoBehaviour
     public void NewGame()
     {
         // Create new game
-        Game = new GameData(1234);
+        var random = new System.Random();
+        Game = new GameData(random.Next());
         Debug.Log("New Game Data!");
     }
 

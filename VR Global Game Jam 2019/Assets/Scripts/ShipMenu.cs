@@ -65,11 +65,15 @@ public class ShipMenu : MonoBehaviour
         selectedPlanet = data;
 
         DetailsText.text = "Name: " + data.PlanetName
-            + "\n Star: " + data.StarName
             + "\n Distance: " + data.PlanetDistance
             + "\n Composition: " + data.PlanetComposition
             + "\n Atmosphere: " + data.PlanetAtmosphere
             + "\n Temperature: " + data.PlanetTemperature
+            + "\n -------------------------"
+            + "\n Star: " + data.StarName
+            + "\n Star Type: " + data.StarType.Name
+            + "\n Star Temperature: " + data.StarTemperature
+            + "\n Star Color: " + data.StarColor
             ;
 
         PlanetPreview.SetActive(true);
