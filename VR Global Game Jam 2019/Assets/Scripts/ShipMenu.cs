@@ -61,8 +61,7 @@ public class ShipMenu : MonoBehaviour
     void Update()
     {
         PlanetPreview.transform.Rotate(Vector3.up, GlobeSpeed * Time.deltaTime);
-
-
+        
     }
 
     public void LoadPlanetData(PlanetData data) {

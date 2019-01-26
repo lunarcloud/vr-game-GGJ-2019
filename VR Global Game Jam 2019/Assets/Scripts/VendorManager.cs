@@ -3,59 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PortManager : MonoBehaviour
+public class VendorManager : MonoBehaviour
 {
     private GameDataManager DataManager;
-    
+
     public PanelFade BlackoutCover;
 
     public Light Sun;
 
     public Material sky;
 
-    public GameObject[] vendorLights;
+    public float GlobeSpeed = 5f;
+
+    public GameObject Globe;
 
     private void Awake()
     {
-        vendorLights = GameObject.FindGameObjectsWithTag("VendorLights");
-        foreach (var light in vendorLights)
-        {
-            light.SetActive(false);
-        }
         BlackoutCover.FadeOut();
     }
-
     // Start is called before the first frame update
     void Start()
     {
         DataManager = FindObjectOfType<GameDataManager>();
         Sun.color = DataManager.Game.Player.Location.StarColor;
+
+        var worldTexture = DataManager.Game.Player.Location.CreateWorldTexture();
+        Globe.GetComponent<Renderer>().material.mainTexture = worldTexture;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Globe.transform.Rotate(Vector3.up, GlobeSpeed * Time.deltaTime);
     }
 
-    public void EnableVendorLight(int index)
+    public void BackToPort()
     {
-        vendorLights[index].SetActive(true);
-    }
-
-    public void DisableVendorLight(int index)
-    {
-        vendorLights[index].SetActive(false);
-    }
-
-    public void BackToShip()
-    {
-        FadeToByIndex(1);
-    }
-
-    public void ToVendor(int type)
-    {
-        FadeToByIndex(3);
+        FadeToByIndex(2);
     }
 
     private void FadeToByIndex(int sceneIndex)
