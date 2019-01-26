@@ -1,11 +1,16 @@
 public class GameData
 {
+    public int Seed { get; }
+
     public PlayerData Player { get; }
     
     public PlanetData[] Planets { get; }
     
     public GameData(int seed)
     {
+        // Save the seed
+        Seed = seed;
+
         // Create player data
         Player = new PlayerData();
         
