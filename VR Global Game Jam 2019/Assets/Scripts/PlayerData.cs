@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerData
 {
     public string PlayerName { get; set; } = CaptainNameGenerator.Create();
@@ -7,6 +9,8 @@ public class PlayerData
     public long Currency { get; set; } = 50000;
 
     public PlanetData Location { get; set; }
+
+    public Texture2D LocationTexture { get; set; }
 
     public Inventory Inventory { get; } = new Inventory();
 }
