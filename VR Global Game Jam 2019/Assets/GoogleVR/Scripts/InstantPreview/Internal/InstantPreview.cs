@@ -275,16 +275,14 @@ namespace Gvr.Internal
             var pluginIPVersionName = sb.ToString();
             Debug.Log("Instant Preview Version: " + pluginIPVersionName);
 
-            // Tries to install Instant Preview apk if set to do so.
-            if (InstallApkOnRun)
+            if (InstallApkOnRun && InstantPreviewApk == null)
             {
-                // Early outs if set to install but the apk can't be found.
-                if (InstantPreviewApk == null)
-                {
-                    Debug.LogError("Trying to install Instant Preview apk but reference to InstantPreview.apk is broken.");
-                    return;
-                }
+                Debug.LogWarning("Instant Preview APK isn't configured on Instance.");
+            }
 
+            // Tries to install Instant Preview apk if set to do so.
+            if (InstallApkOnRun && InstantPreviewApk != null)
+            {
                 // Gets the apk path and installs it on a separate thread.
                 var apkPath = Path.GetFullPath(UnityEditor.AssetDatabase.GetAssetPath(InstantPreviewApk));
                 if (File.Exists(apkPath))

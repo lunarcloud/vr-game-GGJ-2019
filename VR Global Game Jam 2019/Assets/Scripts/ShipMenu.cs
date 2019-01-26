@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System;
 
 public class ShipMenu : MonoBehaviour
@@ -10,6 +11,8 @@ public class ShipMenu : MonoBehaviour
     private GameDataManager DataManager;
 
     public Image PlanetImage;
+
+    public GameObject PlanetPreview;
 
     public Text DetailsText;
 
@@ -26,6 +29,15 @@ public class ShipMenu : MonoBehaviour
     private float positionScale = 0.0025f;
 
     public float ButtonYStartPos = 125f;
+
+    private PlanetData selectedPlanet;
+    
+    public PanelFade BlackoutCover;
+
+    private void Awake()
+    {
+        BlackoutCover.FadeOut();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +62,24 @@ public class ShipMenu : MonoBehaviour
     }
 
     public void LoadPlanetData(PlanetData data) {
-        DetailsText.text = "Name: " + data.PlanetName 
-            + "\n Gravity: " + data.PlanetGravity;
+        selectedPlanet = data;
+
+        DetailsText.text = "Name: " + data.PlanetName
+            + "\n Star: " + data.StarName
+            + "\n Distance: " + data.PlanetDistance
+            + "\n Composition: " + data.PlanetComposition
+            + "\n Atmosphere: " + data.PlanetAtmosphere
+            + "\n Temperature: " + data.PlanetTemperature
+            ;
+
+        PlanetPreview.SetActive(true);
+        /*
+        Texture runtimeTexture = (Texture)Resources.Load("earth");
+        Material runtimeMaterial = new Material(Shader.Find("VertexLit"));
+        runtimeMaterial.SetTexture("_MainTex", runtimeTexture);
+
+        PlanetPreview.GetComponent<Renderer>().material = runtimeMaterial;
+        */
     }
 
     public void AddListItem(string text, float buttonYPos, UnityEngine.Events.UnityAction onClick)
@@ -67,5 +95,30 @@ public class ShipMenu : MonoBehaviour
         {
             eventSystem.firstSelectedGameObject = choice.gameObject;
         }
+    }
+
+    public void Travel() {
+
+        if (selectedPlanet == null) return;
+
+        DataManager.Game.Player.Location = selectedPlanet;
+        FadeToByIndex(2);
+    }
+
+    public void FadeToByIndex(int sceneIndex)
+    {
+        StartCoroutine(FadeToByIndexImpl(sceneIndex));
+    }
+
+    private IEnumerator FadeToByIndexImpl(int sceneIndex)
+    {
+        BlackoutCover.FadeIn();
+        yield return new WaitForSeconds(2);
+        LoadByIndex(sceneIndex);
+    }
+
+    public void LoadByIndex(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 }
