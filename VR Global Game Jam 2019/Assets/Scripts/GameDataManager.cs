@@ -10,6 +10,7 @@ public class GameDataManager : MonoBehaviour
     {
         // Create new game
         Game = new GameData(1234);
+        Debug.Log("New Game Data!");
     }
 
     // Start is called before the first frame update
