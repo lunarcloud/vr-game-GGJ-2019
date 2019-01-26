@@ -1,10 +1,10 @@
-public class GameState
+public class GameData
 {
     public PlayerData Player { get; }
     
     public PlanetData[] Planets { get; }
     
-    public GameState(int seed)
+    public GameData(int seed)
     {
         // Create player data
         Player = new PlayerData();
