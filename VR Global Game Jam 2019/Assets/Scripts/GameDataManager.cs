@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDataManager : MonoBehaviour
 {
     public GameData Game { get; set; }
+
+    public void Awake()
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 0) {
+            NewGame();
+        }
+    }
 
     public void NewGame()
     {
