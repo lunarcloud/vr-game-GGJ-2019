@@ -21,7 +21,7 @@ public class StarType : IProbability
     public RangeFloat Mass { get; }
     public RangeFloat Habitable { get; }
 
-    public StarType(float probability, string name, float minTemp, float maxTemp, float minMass, float maxMass,
+    private StarType(float probability, string name, float minTemp, float maxTemp, float minMass, float maxMass,
         float minHabit, float maxHabit)
     {
         Probability = probability;

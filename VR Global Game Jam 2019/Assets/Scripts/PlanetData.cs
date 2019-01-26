@@ -28,8 +28,14 @@ public class PlanetData
         // Generate planet name
         PlanetName = NameGenerator.Create(rand.NextInt());
 
+        // Select planet composition
+        PlanetComposition = rand.NextFrom(PlanetCompositionType.Types);
+
+        // Select atmosphere
+        PlanetAtmosphere = rand.NextFrom(AtmosphereType.Types);
+
         // Generate planet distance
-        PlanetDistance = StarHabitableZone * (0.9f + rand.NextFloat() * 0.2f);
+        PlanetDistance = StarHabitableZone * PlanetAtmosphere.HabitableModifier.Interpolate(rand.NextFloat());
 
         // Generate planet diameter
         PlanetDiameter = 7000 + rand.NextFloat() * 9000;
@@ -56,6 +62,10 @@ public class PlanetData
     public float StarHabitableZone { get; }
     
     public string PlanetName { get; }
+
+    public PlanetCompositionType PlanetComposition { get; }
+
+    public AtmosphereType PlanetAtmosphere { get; }
 
     public float PlanetDistance { get; }
 
