@@ -1,7 +1,30 @@
+using System.Collections.Generic;
+
 public class PlanetCompositionType : IProbability
 {
-    public static readonly PlanetCompositionType NickelIron = new PlanetCompositionType(0.6f, "NickelIron");
-    public static readonly PlanetCompositionType Silicate = new PlanetCompositionType(0.3f, "Silicate");
+    public static readonly PlanetCompositionType NickelIron = new PlanetCompositionType
+    {
+        Probability = 0.6f,
+        Name = "Nickel Iron",
+        ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
+        {
+            { ResourceType.Steel, new RangeFloat(0.2f, 0.8f) },
+            { ResourceType.Lithium, new RangeFloat(0.2f, 0.8f) },
+            { ResourceType.Uranium, new RangeFloat(0.2f, 0.8f) }
+        }
+    };
+
+    public static readonly PlanetCompositionType Silicate = new PlanetCompositionType
+    {
+        Probability = 0.3f,
+        Name = "Silicate",
+        ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
+        {
+            { ResourceType.Steel, new RangeFloat(2f, 5f) },
+            { ResourceType.Lithium, new RangeFloat(3f, 7f) },
+            { ResourceType.Uranium, new RangeFloat(8f, 20f) }
+        }
+    };
 
     public static readonly PlanetCompositionType[] Types =
     {
@@ -9,12 +32,7 @@ public class PlanetCompositionType : IProbability
         Silicate
     };
 
-    private PlanetCompositionType(float prob, string name)
-    {
-        Probability = prob;
-        Name = name;
-    }
-
-    public float Probability { get; }
-    public string Name { get; }
+    public float Probability { get; private set; }
+    public string Name { get; private set; }
+    public Dictionary<ResourceType, RangeFloat> ResourceModifiers { get; private set; }
 }

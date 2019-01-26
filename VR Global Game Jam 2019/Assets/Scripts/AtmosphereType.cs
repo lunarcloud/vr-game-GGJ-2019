@@ -1,11 +1,57 @@
-﻿public class AtmosphereType : IProbability
+﻿using System.Collections.Generic;
+
+public class AtmosphereType : IProbability
 {
-    public static readonly AtmosphereType Vacuum = new AtmosphereType(0.1f, "Vacuum", 0.5f, 1.5f);
-    public static readonly AtmosphereType NitrogenOxygen = new AtmosphereType(0.9f, "Nitrogen/Oxygen", 0.9f, 1.1f);
-    public static readonly AtmosphereType Methane = new AtmosphereType(0.1f, "Methane", 0.8f, 1.3f);
-    public static readonly AtmosphereType Ammonia = new AtmosphereType(0.1f, "Ammonia", 0.7f, 1.1f);
-    public static readonly AtmosphereType Nitrogen = new AtmosphereType(0.1f, "Nitrogen", 0.7f, 1.6f);
-    public static readonly AtmosphereType HydrogenSulfide = new AtmosphereType(0.1f, "HydrogenSulfide", 0.8f, 1.3f);
+    public static readonly AtmosphereType Vacuum = new AtmosphereType
+    {
+        Probability = 0.1f,
+        Name = "Vacuum",
+        HabitableModifier = new RangeFloat(0.5f, 1.5f),
+        ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
+        {
+            { ResourceType.Water, new RangeFloat(10f, 50f) },
+            { ResourceType.LiquidOxygen, new RangeFloat(2f, 5f) }
+        }
+    };
+
+    public static readonly AtmosphereType NitrogenOxygen = new AtmosphereType
+    {
+        Probability = 0.9f,
+        Name= "Nitrogen/Oxygen",
+        HabitableModifier = new RangeFloat(0.9f, 1.1f),
+        ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
+        {
+            {ResourceType.Water, new RangeFloat(0.1f, 0.8f) }
+        }
+    };
+
+    public static readonly AtmosphereType Methane = new AtmosphereType
+    {
+        Probability = 0.1f,
+        Name = "Methane",
+        HabitableModifier = new RangeFloat(0.8f, 1.3f)
+    };
+
+    public static readonly AtmosphereType Ammonia = new AtmosphereType
+    {
+        Probability = 0.1f,
+        Name = "Ammonia",
+        HabitableModifier = new RangeFloat(0.7f, 1.1f)
+    };
+
+    public static readonly AtmosphereType Nitrogen = new AtmosphereType
+    {
+        Probability = 0.1f,
+        Name = "Nitrogen",
+        HabitableModifier = new RangeFloat(0.7f, 1.6f)
+    };
+
+    public static readonly AtmosphereType HydrogenSulfide = new AtmosphereType
+    {
+        Probability = 0.1f,
+        Name = "Hydrogen Sulfide",
+        HabitableModifier = new RangeFloat(0.8f, 1.3f)
+    };
 
     public static readonly AtmosphereType[] Types =
     {
@@ -17,14 +63,8 @@
         HydrogenSulfide
     };
 
-    private AtmosphereType(float probability, string name, float minHab, float maxHab)
-    {
-        Probability = probability;
-        Name = name;
-        HabitableModifier = new RangeFloat(minHab, maxHab);
-    }
-
-    public float Probability { get; }
-    public string Name { get; }
-    public RangeFloat HabitableModifier { get; }
+    public float Probability { get; private set; }
+    public string Name { get; private set; }
+    public RangeFloat HabitableModifier { get; private set; }
+    public Dictionary<ResourceType, RangeFloat> ResourceModifiers { get; private set; }
 }
