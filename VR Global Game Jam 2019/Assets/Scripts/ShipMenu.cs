@@ -18,20 +18,24 @@ public class ShipMenu : MonoBehaviour
     private Button ButtonPrefab;
 
     [SerializeField]
-    private GameObject ListContent;
+    private GameObject PlanetsListParent;
 
     public EventSystem eventSystem;
-
-    private float positionScale = 0.0025f;
-
-    public float ButtonYStartPos = 125f;
-
+  
     private PlanetData selectedPlanet;
     
     public PanelFade BlackoutCover;
 
+    public Text shipPlack;
+
     public float GlobeSpeed = 30f;
     
+    [SerializeField]
+    private Text PriceItemPrefab;
+
+    [SerializeField]
+    private GameObject PricesListParent;
+
     private void Awake()
     {
         BlackoutCover.FadeOut();
@@ -42,16 +46,14 @@ public class ShipMenu : MonoBehaviour
     {
         DataManager = FindObjectOfType<GameDataManager>();
 
-        var ButtonYPos = ButtonYStartPos;
+        shipPlack.text = DataManager.Game.Player.ShipName;
+
         foreach (var planet in DataManager.Game.Planets)
         {
-            AddListItem(
-                planet.PlanetName, 
-                ButtonYPos,
-                DataManager.Game.Player.Location.Equals(planet), 
+            AddPlanetItem(
+                planet.PlanetName,
+                DataManager.Game.Player.Location.Equals(planet),
                 delegate { LoadPlanetData(planet); });
-
-            ButtonYPos -= 45;
         }
 
         LoadPlanetData(DataManager.Game.Player.Location);
@@ -79,18 +81,29 @@ public class ShipMenu : MonoBehaviour
             + "\n Star Color: " + data.StarColor
             ;
 
+        
+        // Clear List, then build
+        foreach (Transform child in PricesListParent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        foreach (var resource in data.ResourceCosts)
+        {
+            AddPriceItem($" {resource.Key.Name} : $ {(resource.Value / 100)}.{(resource.Value % 100):00}");
+        }
+
         PlanetPreview.SetActive(true);
 
         var worldTexture = data.CreateWorldTexture();
         PlanetPreview.GetComponent<Renderer>().material.mainTexture = worldTexture;
     }
 
-    public void AddListItem(string text, float buttonYPos, bool isHighlighted, UnityEngine.Events.UnityAction onClick)
+    private void AddPlanetItem(string text, bool isHighlighted, UnityEngine.Events.UnityAction onClick)
     {
         Button choice = Instantiate(ButtonPrefab) as Button;
         Text choiceText = choice.GetComponentInChildren<Text>();
 
-        choice.transform.SetParent(ListContent.transform, false);
+        choice.transform.SetParent(PlanetsListParent.transform, false);
         choice.onClick.AddListener(onClick);
         choiceText.text = text;
 
@@ -100,6 +113,12 @@ public class ShipMenu : MonoBehaviour
         }
     }
 
+    private void AddPriceItem(string text)
+    {
+        Text item = Instantiate(PriceItemPrefab) as Text;
+        item.text = text;
+        item.transform.SetParent(PricesListParent.transform, false);
+    }
 
     public void Travel() {
 
