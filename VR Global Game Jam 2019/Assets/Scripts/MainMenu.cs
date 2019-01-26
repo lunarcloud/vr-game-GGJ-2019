@@ -9,16 +9,42 @@ public class MainMenu : MonoBehaviour
 
     public PanelFade BlackoutCover;
 
+    public Button NewGameButton;
+
     public Button ContinueButton;
+
+    public Button QuitButton;
+
+    public Text PlayerName;
+
+    public Text ShipName;
+
+    public Canvas PlayerNameCanvas;
+
+    public Canvas ShipNameCanvas;
+
+    public Button PlayButton;
+
+    public GvrKeyboard keyboard;
 
     private bool quitting = false;
 
     void Awake()
     {
-        BlackoutCover.FadeOut();
+        keyboard.gameObject.SetActive(false);
+
+        NewGameButton.gameObject.SetActive(true);
+        ContinueButton.gameObject.SetActive(true);
+        QuitButton.gameObject.SetActive(true);
+        PlayerNameCanvas.gameObject.SetActive(false);
+        ShipNameCanvas.gameObject.SetActive(false);
+        PlayButton.gameObject.SetActive(false);
+        
         //if (DataManager.hasExistingData) {
         //    ContinueButton.interactable = true;
         //}
+
+        BlackoutCover.FadeOut();
     }
 
     private void Update()
@@ -28,9 +54,32 @@ public class MainMenu : MonoBehaviour
             Quit();
         }
     }
+    
+    public void NewGame()
+    {
+        NewGameButton.gameObject.SetActive(false);
+        ContinueButton.gameObject.SetActive(false);
+        QuitButton.gameObject.SetActive(false);
 
-    public void NewGame() {
         DataManager.NewGame();
+
+        PlayerNameCanvas.gameObject.SetActive(true);
+        ShipNameCanvas.gameObject.SetActive(true);
+        PlayButton.gameObject.SetActive(true);
+    }
+
+    public void ChangeInputDelegate(GvrKeyboardDelegateBase gvrKeyboard) {
+        keyboard.gameObject.SetActive(false);
+        keyboard.ClearText();
+        keyboard.keyboardDelegate = gvrKeyboard;
+        keyboard.gameObject.SetActive(true);
+    }
+
+    public void PlayGame() {
+
+        // PlayerName.text;
+        // ShipName.text;
+
         FadeToByIndex(1);
     }
 
