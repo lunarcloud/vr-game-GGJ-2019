@@ -32,7 +32,6 @@ public static class CaptainNameGenerator
         "Sutter", "Wolsey"
     };
 
-
     public static string Create(int seed)
     {
         // Build random number generator for name

@@ -2,7 +2,7 @@ public class PlayerData
 {
     public string PlayerName { get; set; } = CaptainNameGenerator.Create();
 
-    public string ShipName { get; set; } = string.Empty;
+    public string ShipName { get; set; } = ShipNameGenerator.Create();
 
     public long Currency { get; set; } = 50000;
 
