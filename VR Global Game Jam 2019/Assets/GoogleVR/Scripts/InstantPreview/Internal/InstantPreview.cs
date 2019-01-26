@@ -524,10 +524,14 @@ namespace Gvr.Internal
         void UpdateEvents()
         {
             UnityGvrEvent unityGvrEvent = new UnityGvrEvent();
-            while (GetGvrEvent(ref unityGvrEvent))
+            try
             {
-                events.Enqueue(unityGvrEvent);
+                while (GetGvrEvent(ref unityGvrEvent))
+                {
+                    events.Enqueue(unityGvrEvent);
+                }
             }
+            catch (EntryPointNotFoundException ex) { }
         }
 
         void Update()

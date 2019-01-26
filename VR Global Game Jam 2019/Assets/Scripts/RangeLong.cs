@@ -1,3 +1,5 @@
+using System;
+
 public struct RangeLong
 {
     public long Minimum;
