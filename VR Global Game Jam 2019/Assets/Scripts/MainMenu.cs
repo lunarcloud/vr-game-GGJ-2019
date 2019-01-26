@@ -15,13 +15,13 @@ public class MainMenu : MonoBehaviour
 
     public Button QuitButton;
 
-    public Text PlayerName;
+    public Text InputTitle;
 
-    public Text ShipName;
+    public Text InputText;
 
-    public Canvas PlayerNameCanvas;
+    public Canvas InputCanvas;
 
-    public Canvas ShipNameCanvas;
+    public Button NextButton;
 
     public Button PlayButton;
 
@@ -36,10 +36,10 @@ public class MainMenu : MonoBehaviour
         NewGameButton.gameObject.SetActive(true);
         ContinueButton.gameObject.SetActive(true);
         QuitButton.gameObject.SetActive(true);
-        PlayerNameCanvas.gameObject.SetActive(false);
-        ShipNameCanvas.gameObject.SetActive(false);
+        InputCanvas.gameObject.SetActive(false);
+        NextButton.gameObject.SetActive(false);
         PlayButton.gameObject.SetActive(false);
-        
+
         //if (DataManager.hasExistingData) {
         //    ContinueButton.interactable = true;
         //}
@@ -63,22 +63,39 @@ public class MainMenu : MonoBehaviour
 
         DataManager.NewGame();
 
-        PlayerNameCanvas.gameObject.SetActive(true);
-        ShipNameCanvas.gameObject.SetActive(true);
-        PlayButton.gameObject.SetActive(true);
-    }
+        InputTitle.text = "Input Captain Name";
+        InputText.text = "";
 
+        InputCanvas.gameObject.SetActive(true);
+        NextButton.gameObject.SetActive(true);
+    }
+ 
     public void ChangeInputDelegate(GvrKeyboardDelegateBase gvrKeyboard) {
-        keyboard.gameObject.SetActive(false);
+        keyboard.keyboardDelegate = null;
         keyboard.ClearText();
         keyboard.keyboardDelegate = gvrKeyboard;
         keyboard.gameObject.SetActive(true);
     }
 
-    public void PlayGame() {
+    public void PlayerNameGood()
+    {
+        keyboard.gameObject.SetActive(false);
+        var PlayerName = InputText.text;
 
-        // PlayerName.text;
-        // ShipName.text;
+        InputTitle.text = "Input Ship Name";
+        InputText.text = "";
+
+        NextButton.gameObject.SetActive(false);
+        PlayButton.gameObject.SetActive(true);
+    }
+
+    public void PlayGame()
+    {
+        keyboard.gameObject.SetActive(false);
+        NextButton.gameObject.SetActive(false);
+        PlayButton.gameObject.SetActive(false);
+
+        var ShipName = InputText.text;
 
         FadeToByIndex(1);
     }
