@@ -106,21 +106,20 @@ public class PlanetData
     {
         var ret = new Texture2D(256, 256);
 
-        var perlin = new Perlin3D{Depth = 5, Freq = 0.01f, Seed = Seed};
+        var gen = TerrainType.EarthWorld.GetTerrainGenerator(Seed, PlanetTemperature);
 
         for (var ty = 0; ty < 256; ++ty)
         {
             var lat = ty * 3.1415927f / 256;
-            var wz = Mathf.Cos(lat) * 300f;
-            var wr = Mathf.Sin(lat) * 300f;
+            var wz = Mathf.Cos(lat) * PlanetDiameter;
+            var wr = Mathf.Sin(lat) * PlanetDiameter;
             for (var tx = 0; tx < 256; ++tx)
             {
                 var lon = tx * 6.2831854f / 256;
                 var wx = Mathf.Sin(lon) * wr;
                 var wy = Mathf.Cos(lon) * wr;
 
-                var terrain = perlin.Value(wx, wy, wz);
-                ret.SetPixel(tx, ty, new Color(terrain, terrain, terrain));
+                ret.SetPixel(tx, ty, gen.GetColor(wx, wy, wz));
             }
         }
         ret.Apply();
