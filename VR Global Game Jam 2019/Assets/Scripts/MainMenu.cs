@@ -82,6 +82,8 @@ public class MainMenu : MonoBehaviour
         keyboard.gameObject.SetActive(false);
         var PlayerName = InputText.text;
 
+        // TODO set the player name
+
         InputTitle.text = "Input Ship Name";
         InputText.text = "";
 
@@ -96,6 +98,8 @@ public class MainMenu : MonoBehaviour
         PlayButton.gameObject.SetActive(false);
 
         var ShipName = InputText.text;
+
+        // TODO set the ship name
 
         FadeToByIndex(1);
     }
