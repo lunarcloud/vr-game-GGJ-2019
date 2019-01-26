@@ -58,7 +58,7 @@ public class ShipMenu : MonoBehaviour
         Text choiceText = choice.GetComponentInChildren<Text>();
 
         choice.transform.SetParent(ListContent.transform, false);
-        var position = choice.GetComponent<RectTransform>().position;
+        var position = choice.GetComponent<RectTransform>().anchoredPosition;
         position.y = buttonYPos;
         choice.transform.position = position;
         choice.onClick.AddListener(onClick);
