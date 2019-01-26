@@ -1,11 +1,14 @@
+_
+ 
 -> Vendor.Conversation
 
-VAR friendly = true
+VAR PlayerName = "Bob"
+
 
 == Vendor ==
 
 = Conversation
 
-Hello{friendly: ! | ...}
+Hello {PlayerName}
 
 -> DONE

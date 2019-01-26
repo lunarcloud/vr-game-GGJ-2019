@@ -10,8 +10,6 @@ public class GameStoryManager : MonoBehaviour {
     public GameObject dialogCanvas;
     public GameObject activationCanvas;
     public UnityEngine.EventSystems.EventSystem eventSystem;
-
-    private bool friendly;
     
     private bool pointingAtDialogBox = false;
 
@@ -37,11 +35,9 @@ public class GameStoryManager : MonoBehaviour {
     {
         dialogCanvas.SetActive(true);
         activationCanvas.SetActive(false);
-        inkManager.story.ObserveVariable("friendly", (string varName, object varFriendly) =>
-        {
-            friendly = (bool) varFriendly;
-        });
         inkManager.StartStory();
+        inkManager.story.variablesState["PlayerName"] = DataManager.Game.Player.PlayerName;
+        inkManager.Continue();
         moreToChatAbout = true;
     }
     

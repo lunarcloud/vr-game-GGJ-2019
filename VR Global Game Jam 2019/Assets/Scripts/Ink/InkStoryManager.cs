@@ -26,8 +26,13 @@ public class InkStoryManager : MonoBehaviour {
 		}
 	}
 
-	public void StartStory() {
-		story = new Story (InkJsonAsset.text);
+    public void Awake()
+    {
+        story = new Story(InkJsonAsset.text);
+    }
+
+    public void StartStory() {
+        story.ResetState();
 		Continue ();
 	} 
 
