@@ -213,7 +213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.3799925, y: -24.044939}
+  m_AnchoredPosition: {x: -3.380005, y: -24.044937}
   m_SizeDelta: {x: -37.240017, y: -86.90988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &223977372
@@ -294,7 +294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: -139.99998}
+  m_AnchoredPosition: {x: 8, y: -15.07}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244685589
@@ -951,7 +951,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720753087}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.41}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
   m_LocalScale: {x: 0.005, y: 0.0050000036, z: 0.010000007}
   m_Children:
   - {fileID: 564192070}
@@ -1042,11 +1042,11 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 591035377}
-          m_MethodName: ChangeInputDelegate
-          m_Mode: 2
+          m_MethodName: ShowKeyboard
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 564192071}
-            m_ObjectArgumentAssemblyTypeName: GvrKeyboardDelegateBase, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1202,7 +1202,7 @@ PrefabInstance:
     - target: {fileID: 1260534185, guid: 6c99596fcbe574b168ae0faa3afe8546, type: 3}
       propertyPath: keyboardDelegate
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 564192071}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c99596fcbe574b168ae0faa3afe8546, type: 3}
 --- !u!4 &762418973 stripped
@@ -1791,7 +1791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: -139.99998}
+  m_AnchoredPosition: {x: 8, y: -15.07}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1542730650

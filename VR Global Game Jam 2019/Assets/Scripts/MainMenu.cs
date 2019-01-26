@@ -64,31 +64,37 @@ public class MainMenu : MonoBehaviour
         DataManager.NewGame();
 
         InputTitle.text = "Input Captain Name";
-        InputText.text = "";
-
+        InputText.text = DataManager.Game.Player.PlayerName;
+        keyboard.gameObject.SetActive(true);
+        StartCoroutine(SetEditorText(DataManager.Game.Player.PlayerName));
+        
         InputCanvas.gameObject.SetActive(true);
         NextButton.gameObject.SetActive(true);
     }
  
-    public void ChangeInputDelegate(GvrKeyboardDelegateBase gvrKeyboard) {
-        keyboard.keyboardDelegate = null;
-        keyboard.ClearText();
-        keyboard.keyboardDelegate = gvrKeyboard;
+    public void ShowKeyboard() {
         keyboard.gameObject.SetActive(true);
     }
 
     public void PlayerNameGood()
     {
         keyboard.gameObject.SetActive(false);
-        var PlayerName = InputText.text;
-
-        // TODO set the player name
-
+        DataManager.Game.Player.PlayerName = InputText.text;
+        
         InputTitle.text = "Input Ship Name";
-        InputText.text = "";
+        InputText.text = DataManager.Game.Player.ShipName;
+        keyboard.gameObject.SetActive(true);
+        StartCoroutine(SetEditorText(DataManager.Game.Player.ShipName));
+        
 
         NextButton.gameObject.SetActive(false);
         PlayButton.gameObject.SetActive(true);
+    }
+
+    private IEnumerator SetEditorText(string text)
+    {
+        yield return new WaitForSeconds(1);
+        keyboard.EditorText = text;
     }
 
     public void PlayGame()
@@ -97,10 +103,8 @@ public class MainMenu : MonoBehaviour
         NextButton.gameObject.SetActive(false);
         PlayButton.gameObject.SetActive(false);
 
-        var ShipName = InputText.text;
-
-        // TODO set the ship name
-
+        DataManager.Game.Player.ShipName = InputText.text;
+    
         FadeToByIndex(1);
     }
 
