@@ -13,7 +13,7 @@ public class PlanetData
             rand.NextFloat() * 30f - 15f);
 
         // Generate star name
-        StarName = NameGenerator.Create(rand.NextInt());
+        StarName = AlienNameGenerator.Create(rand.NextInt());
 
         // Select star type
         StarType = rand.NextFrom(StarType.Types);
@@ -26,7 +26,7 @@ public class PlanetData
         StarHabitableZone = StarType.Habitable.Interpolate(starModifier);
 
         // Generate planet name
-        PlanetName = NameGenerator.Create(rand.NextInt());
+        PlanetName = AlienNameGenerator.Create(rand.NextInt());
 
         // Select planet composition
         PlanetComposition = rand.NextFrom(PlanetCompositionType.Types);

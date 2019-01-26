@@ -1,4 +1,4 @@
-﻿public static class NameGenerator
+﻿public static class AlienNameGenerator
 {
     private static readonly string[] Start =
     {
