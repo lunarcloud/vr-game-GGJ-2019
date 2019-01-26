@@ -24,8 +24,6 @@ public class ShipMenu : MonoBehaviour
 
     public EventSystem eventSystem;
 
-    private bool FirstSelectedChosen = false;
-
     private float positionScale = 0.0025f;
 
     public float ButtonYStartPos = 125f;
@@ -47,12 +45,16 @@ public class ShipMenu : MonoBehaviour
         var ButtonYPos = ButtonYStartPos;
         foreach (var planet in DataManager.Game.Planets)
         {
-            AddListItem(planet.PlanetName, ButtonYPos, delegate {
-                LoadPlanetData(planet);
-            });
+            AddListItem(
+                planet.PlanetName, 
+                ButtonYPos,
+                DataManager.Game.Player.Location.Equals(planet), 
+                delegate { LoadPlanetData(planet); });
+
             ButtonYPos -= 45;
         }
 
+        LoadPlanetData(DataManager.Game.Player.Location);
     }
     
     // Update is called once per frame
@@ -86,7 +88,7 @@ public class ShipMenu : MonoBehaviour
         */
     }
 
-    public void AddListItem(string text, float buttonYPos, UnityEngine.Events.UnityAction onClick)
+    public void AddListItem(string text, float buttonYPos, bool isHighlighted, UnityEngine.Events.UnityAction onClick)
     {
         Button choice = Instantiate(ButtonPrefab) as Button;
         Text choiceText = choice.GetComponentInChildren<Text>();
@@ -95,7 +97,7 @@ public class ShipMenu : MonoBehaviour
         choice.onClick.AddListener(onClick);
         choiceText.text = text;
 
-        if (!FirstSelectedChosen)
+        if (isHighlighted)
         {
             eventSystem.firstSelectedGameObject = choice.gameObject;
         }

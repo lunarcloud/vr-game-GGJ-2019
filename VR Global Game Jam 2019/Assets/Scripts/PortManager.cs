@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PortManager : MonoBehaviour
 {
@@ -30,5 +31,32 @@ public class PortManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BackToShip()
+    {
+        FadeToByIndex(1);
+    }
+
+    public void ToVendor(int type)
+    {
+        FadeToByIndex(3);
+    }
+
+    private void FadeToByIndex(int sceneIndex)
+    {
+        StartCoroutine(FadeToByIndexImpl(sceneIndex));
+    }
+
+    private IEnumerator FadeToByIndexImpl(int sceneIndex)
+    {
+        BlackoutCover.FadeIn();
+        yield return new WaitForSeconds(2);
+        LoadByIndex(sceneIndex);
+    }
+
+    public void LoadByIndex(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 }
