@@ -31,7 +31,7 @@ public class ShipMenu : MonoBehaviour
     private PlanetData selectedPlanet;
     
     public PanelFade BlackoutCover;
-
+    
     private void Awake()
     {
         BlackoutCover.FadeOut();
@@ -102,6 +102,7 @@ public class ShipMenu : MonoBehaviour
             eventSystem.firstSelectedGameObject = choice.gameObject;
         }
     }
+
 
     public void Travel() {
 

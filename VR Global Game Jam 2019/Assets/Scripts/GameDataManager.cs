@@ -7,8 +7,15 @@ public class GameDataManager : MonoBehaviour
 {
     public GameData Game { get; set; }
 
-    public void Awake()
+    void Awake()
     {
+        var gameDataManagers = GameObject.FindObjectsOfType<GameDataManager>();
+        if (gameDataManagers.Length > 1) {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+
         if (SceneManager.GetActiveScene().buildIndex > 0) {
             NewGame();
         }
@@ -21,16 +28,5 @@ public class GameDataManager : MonoBehaviour
         Game = new GameData(random.Next());
         Debug.Log("New Game Data!");
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
