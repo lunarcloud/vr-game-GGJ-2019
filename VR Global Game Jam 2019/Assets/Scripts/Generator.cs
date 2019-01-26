@@ -84,6 +84,16 @@ public class Generator
     }
 
     /// <summary>
+    /// Generate a random value in a range
+    /// </summary>
+    /// <param name="range">Range for value</param>
+    /// <returns>Random value</returns>
+    public float NextFrom(RangeFloat range)
+    {
+        return range.Interpolate(NextFloat());
+    }
+
+    /// <summary>
     /// Cycle the pseudorandom number generator
     /// </summary>
     /// <returns>Next 64-bit output</returns>
