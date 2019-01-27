@@ -36,7 +36,7 @@ public class GameStoryManager : MonoBehaviour {
         inkManager.storyEndAction = delegate {
             activationCanvas.SetActive(true);
             dialogCanvas.SetActive(false);
-
+            vendorManager.BackToPort();
         };
 
         inkManager.AddTagProcessor("buy", delegate (string[] values) {
