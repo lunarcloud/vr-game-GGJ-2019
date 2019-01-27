@@ -41,6 +41,8 @@ public class PlanetData
 
         // Select terrain type from atmosphere
         PlanetTerrain = rand.NextFrom(PlanetAtmosphere.AllowedTerrains);
+        PortGroundColor = PlanetTerrain.PortColor;
+        PortOceanColor = PlanetTerrain.OceanColor;
 
         // Generate planet distance
         PlanetDistance = StarHabitableZone * PlanetAtmosphere.HabitableModifier.Interpolate(rand.NextFloat());
@@ -112,6 +114,10 @@ public class PlanetData
     public float PlanetTemperature { get; }
 
     public float PlanetGravity { get; }
+
+    public Color PortGroundColor { get; }
+
+    public Color PortOceanColor { get; }
 
     public Dictionary<ResourceType, long> ResourceCosts { get; }
 

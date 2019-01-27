@@ -16,6 +16,7 @@ public abstract class TerrainType : IProbability
     public abstract float Probability { get; }
     public abstract string Name { get; }
     public abstract Color PortColor { get; }
+    public abstract Color OceanColor { get; }
     public abstract ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter);
 
     private class BarrenRockType : TerrainType
@@ -24,6 +25,7 @@ public abstract class TerrainType : IProbability
         public override string Name => "Barren Rock";
         public override string ToString() => Name;
         public override Color PortColor => new Color(0.4f, 0.4f, 0.4f);
+        public override Color OceanColor => new Color(0.4f, 0.4f, 0.4f);
 
         public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
@@ -64,6 +66,7 @@ public abstract class TerrainType : IProbability
         public override string Name => "Ice World";
         public override string ToString() => Name;
         public override Color PortColor => new Color(0.7f, 0.7f, 0.7f);
+        public override Color OceanColor => new Color(0.7f, 0.7f, 0.7f);
 
         public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
@@ -104,6 +107,7 @@ public abstract class TerrainType : IProbability
         public override string Name => "Earth-Like World";
         public override string ToString() => Name;
         public override Color PortColor => new Color(0.8f, 0.5f, 0.2f);
+        public override Color OceanColor => new Color(0.2f, 0.2f, 0.6f);
 
         public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
