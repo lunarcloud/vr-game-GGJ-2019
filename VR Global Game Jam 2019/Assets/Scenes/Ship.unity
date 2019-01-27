@@ -2488,7 +2488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Price List
+  m_Text: Resources | Buy For | Sell For
 --- !u!222 &1153099608
 CanvasRenderer:
   m_ObjectHideFlags: 0
