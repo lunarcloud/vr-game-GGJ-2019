@@ -112,6 +112,7 @@ public class GameStoryManager : MonoBehaviour {
         activationCanvas.SetActive(false);
         inkManager.StartStory();
         inkManager.story.variablesState["PlayerName"] = DataManager.Game.Player.PlayerName;
+        var friendliness = inkManager.story.variablesState["Friendliness"];
         inkManager.Continue();
     }
     

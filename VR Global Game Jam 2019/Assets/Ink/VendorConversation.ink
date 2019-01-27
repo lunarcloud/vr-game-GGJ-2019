@@ -1,4 +1,4 @@
-_
+...
  
 -> Vendor.Conversation
 
@@ -8,6 +8,8 @@ VAR TalkingAboutResource = "Water"
 VAR AmountFor = "Sell"
 VAR SuccessfulBuy = true
 VAR SuccessfulSell = false
+LIST Friendliness = Low, Normal, High
+~ Friendliness = Normal
 
 == Vendor ==
 
@@ -25,7 +27,7 @@ VAR SuccessfulSell = false
 What are you buying?
 ~ AmountFor = "Buy"
 
-+ [Water] 
++ [Water]
     ~ TalkingAboutResource = "Water"
     -> SelectAmountBuy
 + [Steel]
@@ -49,7 +51,7 @@ What are you buying?
 
 = SelectAmountBuy
 
-. #numpadShow
+. #numpadShow #background:office
 {SuccessfulBuy : Awesome | Sorry, not enough money for that. }
 
 -> Conversation
