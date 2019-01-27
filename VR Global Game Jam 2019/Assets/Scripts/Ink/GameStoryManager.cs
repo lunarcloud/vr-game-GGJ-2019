@@ -11,7 +11,10 @@ public class GameStoryManager : MonoBehaviour {
     public GameObject dialogCanvas;
     public GameObject activationCanvas;
     public UnityEngine.EventSystems.EventSystem eventSystem;
-    
+
+    public GameObject numpadCanvas;
+    public GvrKeyboard numpad;
+
     private bool pointingAtDialogBox = false;
 
     void Awake ()
@@ -74,6 +77,27 @@ public class GameStoryManager : MonoBehaviour {
                 inkManager.story.variablesState["SuccessfulSell"] = false;
             }
         });
+
+        inkManager.AddTagProcessor("numpadShow", delegate (string[] values) {
+            NumpadShow();
+        });
+        inkManager.AddTagProcessor("numpadRetreive", delegate (string[] values) {
+            inkManager.story.variablesState["NumpadValue"] = 1;
+        });
+    }
+
+    public void NumpadShow()
+    {
+        dialogCanvas.SetActive(false);
+        numpadCanvas.SetActive(true);
+        numpad.gameObject.SetActive(true);
+    }
+
+    public void NumpadHide()
+    {
+        dialogCanvas.SetActive(true);
+        numpadCanvas.SetActive(false);
+        numpad.gameObject.SetActive(false);
     }
 
     public void StartStory()
