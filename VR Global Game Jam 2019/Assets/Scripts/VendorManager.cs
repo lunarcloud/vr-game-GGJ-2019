@@ -21,10 +21,6 @@ public class VendorManager : MonoBehaviour
     
     private void Awake()
     {
-        foreach (var vendor in Vendors)
-        {
-            vendor.SetActive(false);
-        }
         BlackoutCover.FadeOut();
     }
     // Start is called before the first frame update
@@ -35,6 +31,11 @@ public class VendorManager : MonoBehaviour
 
         var worldTexture = DataManager.Game.Player.Location.CreateWorldTexture();
         Globe.GetComponent<Renderer>().material.mainTexture = worldTexture;
+
+        foreach (var vendor in Vendors)
+        {
+            vendor.SetActive(vendor.name == DataManager.Game.Player.Location.VendorModel.Name);
+        }
     }
 
     // Update is called once per frame

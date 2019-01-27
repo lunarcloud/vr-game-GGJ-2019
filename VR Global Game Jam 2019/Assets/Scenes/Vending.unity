@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &2474605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100166, guid: 0e2e694c04c3e5d49be6e76f9e3faf40,
+    type: 3}
+  m_PrefabInstance: {fileID: 409593143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &34877271
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,11 +804,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100166, guid: 0e2e694c04c3e5d49be6e76f9e3faf40, type: 3}
       propertyPath: m_Name
-      value: D
+      value: LizardMan
       objectReference: {fileID: 0}
     - target: {fileID: 100166, guid: 0e2e694c04c3e5d49be6e76f9e3faf40, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400166, guid: 0e2e694c04c3e5d49be6e76f9e3faf40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1255,6 +1261,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7633e52e51616314fbfd9bfb8aee06ed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6618d0d1b0761504eb137a39a8449410, type: 3}
+--- !u!1 &595425016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 9b2103a75c38ad149bfdde25b98d48df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1458568102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &622648379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1991,6 +2003,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866448828}
   m_CullTransparentMesh: 0
+--- !u!1 &871799051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100166, guid: 84227de0649c6fd449fa8d24957b6faa,
+    type: 3}
+  m_PrefabInstance: {fileID: 966929150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &892766309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573e2b04dc4734d68a2b6747421ce0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &955350692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100152, guid: 7619113d6f28cbe4b8ed04e74f51f862,
+    type: 3}
+  m_PrefabInstance: {fileID: 1417288578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &966929150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2190,7 +2214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100166, guid: 84227de0649c6fd449fa8d24957b6faa, type: 3}
       propertyPath: m_Name
-      value: B
+      value: BikerElf
       objectReference: {fileID: 0}
     - target: {fileID: 100166, guid: 84227de0649c6fd449fa8d24957b6faa, type: 3}
       propertyPath: m_IsActive
@@ -2520,6 +2544,11 @@ MonoBehaviour:
   sky: {fileID: 2100000, guid: 425baf9826b1ee14ba3f240175c96fff, type: 2}
   GlobeSpeed: 20
   Globe: {fileID: 262936921}
+  Vendors:
+  - {fileID: 595425016}
+  - {fileID: 871799051}
+  - {fileID: 955350692}
+  - {fileID: 2474605}
 --- !u!82 &1137752151
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2807,7 +2836,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100152, guid: 7619113d6f28cbe4b8ed04e74f51f862, type: 3}
       propertyPath: m_Name
-      value: C
+      value: BlackLady
       objectReference: {fileID: 0}
     - target: {fileID: 100152, guid: 7619113d6f28cbe4b8ed04e74f51f862, type: 3}
       propertyPath: m_IsActive
@@ -2926,7 +2955,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 9b2103a75c38ad149bfdde25b98d48df, type: 3}
       propertyPath: m_Name
-      value: A
+      value: BlueGirl
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9b2103a75c38ad149bfdde25b98d48df, type: 3}
       propertyPath: m_IsActive
