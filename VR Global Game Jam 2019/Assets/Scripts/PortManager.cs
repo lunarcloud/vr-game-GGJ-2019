@@ -39,6 +39,9 @@ public class PortManager : MonoBehaviour
         DataManager = FindObjectOfType<GameDataManager>();
         Sun.color = DataManager.Game.Player.Location.StarColor;
 
+        // Increment the number of visits - 1 means we're on the first visit
+        DataManager.Game.Player.Location.VisitCount++;
+
         var temp = DataManager.Game.Player.Location.PlanetTemperature;
         if (temp > 20) {
             music[(int) MusicTypes.Hot].Play();

@@ -109,6 +109,8 @@ public class PlanetData
 
     public int VisitCount { get; set; }
 
+    public float Friendliness { get; set; }
+
     public Texture2D CreateWorldTexture()
     {
         var ret = new Texture2D(256, 256);
