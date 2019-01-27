@@ -81,6 +81,10 @@ public class GameStoryManager : MonoBehaviour {
         inkManager.AddTagProcessor("numpadShow", delegate (string[] values) {
             NumpadShow();
         });
+        numpad.GetComponent<KeyboardDelegateVendorMenu>().KeyboardEnterPressed += (s, e) => {
+            NumpadHide();
+            inkManager.Continue();
+        };
         inkManager.AddTagProcessor("numpadRetreive", delegate (string[] values) {
             inkManager.story.variablesState["NumpadValue"] = 1;
         });

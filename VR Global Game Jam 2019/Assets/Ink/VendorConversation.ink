@@ -15,32 +15,32 @@ VAR SuccessfulSell = false
 
 {Hello {PlayerName}, how are you?|} What are we doing?
 
-* [buy] -> buy
-* [sell] -> sell
-* [talk] -> talk
-* [goodbye] -> Goodbyes
++ [buy] -> buy
++ [sell] -> sell
++ [talk] -> talk
++ [goodbye] -> Goodbyes
 
 = buy
 
 What are you buying?
 ~ AmountFor = "Buy"
 
-* [Water] 
++ [Water] 
     ~ TalkingAboutResource = "Water"
     -> SelectAmountBuy
-* [Steel]
++ [Steel]
     ~ TalkingAboutResource = "Steel"
     -> SelectAmountBuy
-* [Uranium]
++ [Uranium]
     ~ TalkingAboutResource = "Uranium"
     -> SelectAmountBuy
-* [Liquid Oxygen]
++ [Liquid Oxygen]
     ~ TalkingAboutResource = "LiquidOxygen"
     -> SelectAmountBuy
-* [Lithium]
++ [Lithium]
     ~ TalkingAboutResource = "Lithium"
     -> SelectAmountBuy
-* [Nothing]
++ [Nothing]
     -> Conversation
 
 = sell
