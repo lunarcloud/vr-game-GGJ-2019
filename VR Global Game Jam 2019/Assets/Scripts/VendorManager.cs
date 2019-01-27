@@ -18,6 +18,8 @@ public class VendorManager : MonoBehaviour
     public GameObject Globe;
 
     public GameObject[] Vendors;
+
+    public Animator currentAnimator;
     
     private void Awake()
     {
@@ -38,9 +40,9 @@ public class VendorManager : MonoBehaviour
             vendor.SetActive(isActive);
             if (isActive)
             {
-                var animator = vendor.GetComponent<Animator>();
-                animator.SetFloat("friendliness", DataManager.Game.Player.Location.Friendliness);
-                animator.SetBool("ShakingHand", false);
+                currentAnimator = vendor.GetComponent<Animator>();
+                currentAnimator.SetBool("FriendlyGreet", DataManager.Game.Player.Location.Friendliness > 0.4f);
+                currentAnimator.SetBool("ShakingHand", false);
             }
         }
     }
@@ -51,8 +53,21 @@ public class VendorManager : MonoBehaviour
         Globe.transform.Rotate(Vector3.up, GlobeSpeed * Time.deltaTime);
     }
 
+    public void ShakeHands()
+    {
+        StartCoroutine(ShakeHandsImpl());
+    }
+    
+    private IEnumerator ShakeHandsImpl() {
+
+        currentAnimator.SetBool("ShakingHand", true);
+        yield return new WaitForSeconds(1);
+        currentAnimator.SetBool("ShakingHand", false);
+    }
+
     public void BackToPort()
     {
+        DataManager.Game.Player.Location.Friendliness += 0.05f;
         FadeToByIndex(2);
     }
 
