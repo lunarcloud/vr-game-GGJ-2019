@@ -16,7 +16,7 @@ public class VendorManager : MonoBehaviour
     public float GlobeSpeed = 5f;
 
     public GameObject Globe;
-
+    
     private void Awake()
     {
         BlackoutCover.FadeOut();

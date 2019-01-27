@@ -3,9 +3,9 @@ _
 -> Vendor.Conversation
 
 VAR PlayerName = "Bob"
-VAR CurrentPlayerOffer = 0
-VAR CurrentVendorOffer = 0
+VAR NumpadValue = 0
 VAR TalkingAboutResource = "Water"
+VAR AmountFor = "Sell"
 VAR SuccessfulBuy = true
 VAR SuccessfulSell = false
 
@@ -23,21 +23,34 @@ VAR SuccessfulSell = false
 = buy
 
 What are you buying?
+~ AmountFor = "Buy"
 
-* [Water] #buy:Water:1  
-    -> Conversation
-* [Steel] #buy:Steel:1 
-    -> Conversation
-* [Uranium] #buy:Uranium:1 
-    -> Conversation
-* [Liquid Oxygen] #buy:LiquidOxygen:1 
-    -> Conversation
-* [Lithium] #buy:Lithium:1 
-    -> Conversation
+* [Water] 
+    ~ TalkingAboutResource = "Water"
+    -> SelectAmountBuy
+* [Steel]
+    ~ TalkingAboutResource = "Steel"
+    -> SelectAmountBuy
+* [Uranium]
+    ~ TalkingAboutResource = "Uranium"
+    -> SelectAmountBuy
+* [Liquid Oxygen]
+    ~ TalkingAboutResource = "LiquidOxygen"
+    -> SelectAmountBuy
+* [Lithium]
+    ~ TalkingAboutResource = "Lithium"
+    -> SelectAmountBuy
 * [Nothing]
     -> Conversation
 
 = sell
+
+-> Conversation
+
+= SelectAmountBuy
+
+. #numpadShow
+{SuccessfulBuy : Awesome | Sorry, not enough money for that. }
 
 -> Conversation
 
