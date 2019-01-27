@@ -181,7 +181,7 @@ public class GameStoryManager : MonoBehaviour {
     }
 
     private void updateInventoryView() {
-        //inventoryViewer.Reset();
+        inventoryViewer.Reset();
     }
 
     private void Update()
