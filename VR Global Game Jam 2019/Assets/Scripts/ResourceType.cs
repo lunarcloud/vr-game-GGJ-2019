@@ -9,10 +9,10 @@ public class ResourceType : IProbability
         Cost = new RangeFloat(80f, 120f)    // Unit = 80-120
     };
 
-    public static readonly ResourceType LiquidOxygen = new ResourceType
+    public static readonly ResourceType Lox = new ResourceType
     {
         Probability = 1f,
-        Name = "Liquid Oxygen",
+        Name = "Lox",
         Volume = 1f,                        // Unit = 1 Meter^3
         Mass = 1140f,                       // Unit = 1140 KG
         Cost = new RangeFloat(300f, 500f)   // Unit = 300-500
@@ -33,22 +33,22 @@ public class ResourceType : IProbability
         Name = "Lithium",
         Volume = 1f,                        // Unit = 1 Meter^3
         Mass = 534f,                        // Unit = 534 KG
-        Cost = new RangeFloat(2500f, 3300f) // Unit = 2500-3300
+        Cost = new RangeFloat(7000f, 9000f) // Unit = 7000-9000
     };
 
     public static readonly ResourceType Uranium = new ResourceType
     {
         Probability = 0.1f,
         Name = "Uranium",
-        Volume = 0.000001f,                 // Unit = 1 Cm^3
-        Mass = 0.01905f,                    // Unit = 19.05 G
-        Cost = new RangeFloat(1500f, 2500f) // Unit = 1500-2500
+        Volume = 0.000001f,                   // Unit = 1 Cm^3
+        Mass = 0.01905f,                      // Unit = 19.05 G
+        Cost = new RangeFloat(15000f, 25000f) // Unit = 15000-25000
     };
 
     public static readonly ResourceType[] Types =
     {
         Water,
-        LiquidOxygen,
+        Lox,
         Steel,
         Lithium,
         Uranium

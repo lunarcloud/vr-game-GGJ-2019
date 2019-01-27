@@ -8,9 +8,9 @@ public class PlanetCompositionType : IProbability
         Name = "Nickel Iron",
         ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
         {
-            { ResourceType.Steel, new RangeFloat(0.2f, 0.8f) },
-            { ResourceType.Lithium, new RangeFloat(0.2f, 0.8f) },
-            { ResourceType.Uranium, new RangeFloat(0.2f, 0.8f) }
+            { ResourceType.Steel, new RangeFloat(0.5f, 0.8f) },
+            { ResourceType.Lithium, new RangeFloat(0.5f, 0.8f) },
+            { ResourceType.Uranium, new RangeFloat(0.5f, 0.8f) }
         }
     };
 
@@ -20,9 +20,9 @@ public class PlanetCompositionType : IProbability
         Name = "Silicate",
         ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
         {
-            { ResourceType.Steel, new RangeFloat(2f, 5f) },
-            { ResourceType.Lithium, new RangeFloat(3f, 7f) },
-            { ResourceType.Uranium, new RangeFloat(8f, 20f) }
+            { ResourceType.Steel, new RangeFloat(1.2f, 2f) },
+            { ResourceType.Lithium, new RangeFloat(1.2f, 2f) },
+            { ResourceType.Uranium, new RangeFloat(1.2f, 2f) }
         }
     };
 

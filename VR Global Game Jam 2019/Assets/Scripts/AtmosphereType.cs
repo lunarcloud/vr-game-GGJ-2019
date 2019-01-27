@@ -10,7 +10,7 @@ public class AtmosphereType : IProbability
         ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
         {
             { ResourceType.Water, new RangeFloat(10f, 50f) },
-            { ResourceType.LiquidOxygen, new RangeFloat(2f, 5f) }
+            { ResourceType.Lox, new RangeFloat(2f, 5f) }
         },
         AllowedTerrains = new List<TerrainType>
         {

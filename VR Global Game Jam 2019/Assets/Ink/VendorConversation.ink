@@ -38,8 +38,8 @@ VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciat
 + [Uranium]
     ~ TalkingAboutResource = "Uranium"
     ->->
-+ [Liquid Oxygen]
-    ~ TalkingAboutResource = "LiquidOxygen"
++ [Lox]
+    ~ TalkingAboutResource = "Lox"
     ->->
 + [Lithium]
     ~ TalkingAboutResource = "Lithium"
