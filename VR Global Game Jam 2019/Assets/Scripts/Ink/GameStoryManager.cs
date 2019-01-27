@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Linq;
 
 public class GameStoryManager : MonoBehaviour {
 
@@ -13,21 +14,65 @@ public class GameStoryManager : MonoBehaviour {
     
     private bool pointingAtDialogBox = false;
 
-    private bool moreToChatAbout = true;
-
     void Awake ()
     {
         DataManager = FindObjectOfType<GameDataManager>();
 
         inkManager.storyEndAction = delegate {
-            dialogCanvas.SetActive(false);
-            moreToChatAbout = false;
-
-        };
-		inkManager.AddTagProcessor ("talklater", delegate(string value) {
-            moreToChatAbout = true;
             activationCanvas.SetActive(true);
             dialogCanvas.SetActive(false);
+
+        };
+
+        inkManager.AddTagProcessor("buy", delegate (string[] values) {
+            var resourceName = values[0];
+            var success = int.TryParse(values[1], out var quantity);
+            if (!success) {
+                Debug.LogError($"{resourceName} quantity ({values[1]}) can't be parsed as an int!");
+                return;
+            }
+            var resource = ResourceType.Types.First(r => r.Name == resourceName);
+            var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
+
+            if (DataManager.Game.Player.Currency >= resourceCost * quantity)
+            {
+                DataManager.Game.Player.Currency -= resourceCost * quantity;
+                if (DataManager.Game.Player.Inventory.ContainsKey(resource) == false)
+                {
+                    DataManager.Game.Player.Inventory.Add(resource, 0);
+                }
+                DataManager.Game.Player.Inventory[resource] += quantity;
+
+                inkManager.story.variablesState["SuccessfulBuy"] = true;
+            }
+            else
+            {
+                inkManager.story.variablesState["SuccessfulBuy"] = false;
+            }
+        });
+
+        inkManager.AddTagProcessor("sell", delegate (string[] values) {
+            var resourceName = values[0];
+            var success = int.TryParse(values[1], out var quantity);
+            if (!success)
+            {
+                Debug.LogError($"{resourceName} quantity ({values[1]}) can't be parsed as an int!");
+                return;
+            }
+            var resource = ResourceType.Types.First(r => r.Name == resourceName);
+            var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
+
+            if (DataManager.Game.Player.Inventory.ContainsKey(resource)
+                && DataManager.Game.Player.Inventory[resource] >= quantity)
+            {
+                DataManager.Game.Player.Currency += resourceCost * quantity;
+                DataManager.Game.Player.Inventory[resource] -= quantity;
+                inkManager.story.variablesState["SuccessfulSell"] = true;
+            }
+            else
+            {
+                inkManager.story.variablesState["SuccessfulSell"] = false;
+            }
         });
     }
 
@@ -38,7 +83,6 @@ public class GameStoryManager : MonoBehaviour {
         inkManager.StartStory();
         inkManager.story.variablesState["PlayerName"] = DataManager.Game.Player.PlayerName;
         inkManager.Continue();
-        moreToChatAbout = true;
     }
     
     private void Update()
