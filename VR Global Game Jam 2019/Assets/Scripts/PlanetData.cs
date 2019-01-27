@@ -72,6 +72,9 @@ public class PlanetData
             ResourceCosts[res] = (long)Math.Round(cost);
         }
 
+        // Select vendor model
+        VendorModel = rand.NextFrom(VendorModelType.Types);
+
         // Pick social modifiers
         Religion = rand.NextFrom(SocialModifierReligion.Types);
         Family = rand.NextFrom(SocialModifierFamily.Types);
@@ -111,6 +114,8 @@ public class PlanetData
     public float PlanetGravity { get; }
 
     public Dictionary<ResourceType, long> ResourceCosts { get; }
+
+    public VendorModelType VendorModel { get; }
 
     public int VisitCount { get; set; }
 
