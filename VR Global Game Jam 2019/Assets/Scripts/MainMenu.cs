@@ -85,6 +85,7 @@ public class MainMenu : MonoBehaviour
         DataManager.Game.Player.PlayerName = InputText.text;
         
         InputTitle.text = "Input Ship Name";
+        InputText.text = DataManager.Game.Player.ShipName;
         keyboard.gameObject.SetActive(true);
         StartCoroutine(SetEditorText(DataManager.Game.Player.ShipName));
 
@@ -101,9 +102,9 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator SetEditorText(string text)
     {
-        yield return new WaitForSeconds(0.5f);
-        keyboard.EditorText = text;
+        yield return new WaitForSeconds(1.0f);
         InputText.text = text;
+        keyboard.EditorText = text;
     }
 
     public void PlayGame()
