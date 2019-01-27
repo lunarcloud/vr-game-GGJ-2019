@@ -136,6 +136,8 @@ public class PlanetData
 
     public SocialModifierBantering Bantering { get; }
 
+    public bool SocialModifiersKnown { get; set; }
+
     public Dictionary<ResourceType, long> BuyPrices => ResourceCosts.ToDictionary(r => r.Key, r => (long) (Math.Round(r.Value + r.Value * PriceModifier)));
 
     public Dictionary<ResourceType, long> SellPrices => ResourceCosts.ToDictionary(r => r.Key, r => (long)(Math.Round(r.Value - r.Value * PriceModifier)));
