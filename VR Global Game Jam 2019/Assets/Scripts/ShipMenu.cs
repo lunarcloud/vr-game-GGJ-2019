@@ -35,6 +35,8 @@ public class ShipMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject PricesListParent;
+
+    public GameObject[] KidsDrawings;
     
     private void Awake()
     {
@@ -55,6 +57,12 @@ public class ShipMenu : MonoBehaviour
                 DataManager.Game.Player.Location.Equals(planet),
                 delegate { LoadPlanetData(planet); });
         }
+
+        foreach (var drawing in KidsDrawings) {
+            drawing.SetActive(false);
+        }
+        var random = new System.Random();
+        KidsDrawings[random.Next(0, KidsDrawings.Length)].SetActive(true);
 
         LoadPlanetData(DataManager.Game.Player.Location);
     }

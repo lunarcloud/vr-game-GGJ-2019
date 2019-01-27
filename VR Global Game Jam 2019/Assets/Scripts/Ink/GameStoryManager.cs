@@ -93,6 +93,7 @@ public class GameStoryManager : MonoBehaviour {
 
     public void NumpadShow()
     {
+        numpad.ClearText();
         dialogCanvas.SetActive(false);
         numpadCanvas.SetActive(true);
         numpad.gameObject.SetActive(true);

@@ -16,9 +16,15 @@ public class VendorManager : MonoBehaviour
     public float GlobeSpeed = 5f;
 
     public GameObject Globe;
+
+    public GameObject[] Vendors;
     
     private void Awake()
     {
+        foreach (var vendor in Vendors)
+        {
+            vendor.SetActive(false);
+        }
         BlackoutCover.FadeOut();
     }
     // Start is called before the first frame update
