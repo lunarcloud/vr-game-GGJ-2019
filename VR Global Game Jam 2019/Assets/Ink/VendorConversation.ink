@@ -10,6 +10,8 @@ VAR NumpadValue = 0
 VAR SuccessfulBuy = true
 VAR SuccessfulSell = false
 
+VAR HasTraded = false
+
 VAR Friendliness = "Normal" //, Low, High
 VAR Religion = "Not Discussed" //, None, Praise Before Trading, Praise After Trading
 VAR Family = "Offer and Accept Visit" //, None, Offer and Accept Visit, Offer and Refuse Visit
@@ -80,69 +82,73 @@ How Much? #numpadShow
 
 [What do you talk about?]
 
- + Pra[y]ise the Lord.
+ * Pra[y]ise the Lord.
  -> Praise
- + [Family]
+ * [Family]
  -> Home
- + [Joke]
+ * [Joke]
  -> Joke
- + [Insult]
+ * [Insult]
  -> Insult
  + [Back] -> Main
 
 = Praise
-TODO
-
+{
+    - Religion == "None": You say a quick prayer. They respectfully bow their head while you do so. 
+    - Religion == "Not Discussed": You say a quick prayer, but it makes them uncomfortable to talk about such private things.  #friendliness:-0.1
+    - Religion == "Praise Before Trading": 
+    {
+        - HasTraded == false :  You two say a quick prayer. #friendliness:0.1
+        - HasTraded == true :  You go to pray, but they remind you not to do so before business. #friendliness:-0.1
+    }
+    - Religion == "Praise After Trading": 
+    {
+        - HasTraded == true :  You two say a quick prayer. #friendliness:0.1
+        - HasTraded == false :  You go to pray, but they remind you not to do so before business. #friendliness:-0.1
+    }
+}
 -> talk
 
 = Home
 How's your family? Are you all well?
 {
-    - Family == "None": TODO 
-        bad #friendliness:-0.1
-    -> talk
-    - Family == "Offer and Accept Visit": TODO 
-    -> HomeVisitOffer
-    - Family == "Offer and Refuse Visit": TODO 
-    -> HomeVisitOffer
+    - Family == "None": 
+        I don't like to discuss family with business partners. #friendliness:-0.1
+        -> talk
+    - Family == "Offer and Accept Visit": 
+        -> HomeVisitOffer
+    - Family == "Offer and Refuse Visit": 
+        -> HomeVisitOffer
 }
 
 = HomeVisitOffer
 You must visit the family.
  + [Accept]
     {
-        - Family == "Offer and Accept Visit": TODO 
-            good #friendliness:0.1
-        - Family == "Offer and Refuse Visit": TODO 
-            bad #friendliness:-0.1
+        - Family == "Offer and Accept Visit": Wonderful! They can't wait. It'll be great. #friendliness:0.1
+        - Family == "Offer and Refuse Visit": They frown, you don't refuse a visit in this culture. #friendliness:-0.1
     }
  + [Refuse] TODO
     {
-        - Family == "Offer and Accept Visit": TODO
-            bad #friendliness:-0.1
-        - Family == "Offer and Refuse Visit": TODO 
-            good #friendliness:0.1
+        - Family == "Offer and Accept Visit": They frown, you've broken the social norm of politely declining. #friendliness:-0.1
+        - Family == "Offer and Refuse Visit": Well, maybe next time. They smile. #friendliness:0.1
     }
 - -> talk
 
 = Joke
 You Tell A Joke.
 {
-    - Bantering == "Jokes Appreciated": TODO 
-        good #friendliness:0.1
-    - Bantering == "Jokes Insulting": TODO 
-        bad #friendliness:-0.1
+    - Bantering == "Jokes Appreciated": They laugh heartily. #friendliness:0.1
+    - Bantering == "Jokes Insulting": They frown at you. #friendliness:-0.1
     - else : Meh, heard better.
 }
 - -> talk
 
 = Insult
-You Insult their mother.
+You give them a good ribbing.
 {
-    - Bantering == "Insults Appreciated": TODO 
-        good #friendliness:0.1
-    - Bantering == "Insults Insulting": TODO 
-        bad #friendliness:-0.1
+    - Bantering == "Insults Appreciated": They laugh heartily.  #friendliness:0.1
+    - Bantering == "Insults Insulting": They frown at you. #friendliness:-0.1
     - else : Meh, heard better.
 }
 - -> talk

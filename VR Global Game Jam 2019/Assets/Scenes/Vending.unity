@@ -436,6 +436,7 @@ MonoBehaviour:
   numpadDelegate: {fileID: 34877273}
   inventoryCanvas: {fileID: 1627762001}
   vendorManager: {fileID: 1137752150}
+  inventoryViewer: {fileID: 1627762005}
   FriendlinessText: {fileID: 1632917692}
 --- !u!114 &179012091
 MonoBehaviour:
