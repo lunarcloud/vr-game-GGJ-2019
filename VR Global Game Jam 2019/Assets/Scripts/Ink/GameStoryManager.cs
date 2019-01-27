@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class GameStoryManager : MonoBehaviour {
@@ -14,6 +15,10 @@ public class GameStoryManager : MonoBehaviour {
 
     public GameObject numpadCanvas;
     public GvrKeyboard numpad;
+    public Text numpadText;
+    public KeyboardDelegateVendorMenu numpadDelegate;
+
+    private int ValueOfLastNumpad = 0;
 
     private bool pointingAtDialogBox = false;
 
@@ -28,12 +33,9 @@ public class GameStoryManager : MonoBehaviour {
         };
 
         inkManager.AddTagProcessor("buy", delegate (string[] values) {
-            var resourceName = values[0];
-            var success = int.TryParse(values[1], out var quantity);
-            if (!success) {
-                Debug.LogError($"{resourceName} quantity ({values[1]}) can't be parsed as an int!");
-                return;
-            }
+            var resourceName = inkManager.story.variablesState["TalkingAboutResource"].ToString();
+            var quantity = ValueOfLastNumpad;
+            Debug.Log($"Buying {quantity} of {resourceName}.");
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
             var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
 
@@ -55,13 +57,9 @@ public class GameStoryManager : MonoBehaviour {
         });
 
         inkManager.AddTagProcessor("sell", delegate (string[] values) {
-            var resourceName = values[0];
-            var success = int.TryParse(values[1], out var quantity);
-            if (!success)
-            {
-                Debug.LogError($"{resourceName} quantity ({values[1]}) can't be parsed as an int!");
-                return;
-            }
+            var resourceName = inkManager.story.variablesState["TalkingAboutResource"].ToString();
+            var quantity = ValueOfLastNumpad;
+            Debug.Log($"Selling {quantity} of {resourceName}.");
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
             var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
 
@@ -81,26 +79,35 @@ public class GameStoryManager : MonoBehaviour {
         inkManager.AddTagProcessor("numpadShow", delegate (string[] values) {
             NumpadShow();
         });
-        var numpadDelegate = numpad.GetComponent<KeyboardDelegateVendorMenu>();
         numpadDelegate.KeyboardEnterPressed += (s, e) => {
-            NumpadHide();
-            inkManager.Continue();
+            DoneNumpad();
         };
-        inkManager.AddTagProcessor("numpadRetreive", delegate (string[] values) {
-            inkManager.story.variablesState["NumpadValue"] = 1;
-        });
     }
 
     public void NumpadShow()
     {
         numpad.ClearText();
+        numpadText.text = "";
         dialogCanvas.SetActive(false);
         numpadCanvas.SetActive(true);
         numpad.gameObject.SetActive(true);
     }
 
-    public void NumpadHide()
+    public void DoneNumpad() {
+        var success = int.TryParse(numpad.EditorText, out ValueOfLastNumpad);
+        if (!success)
+        {
+            Debug.LogError($"{numpad.EditorText} can't be parsed as an int!");
+            ValueOfLastNumpad = 0;
+        }
+        NumpadHide();
+        inkManager.Continue();
+    }
+
+    private void NumpadHide()
     {
+        numpad.ClearText();
+        numpadText.text = "";
         dialogCanvas.SetActive(true);
         numpadCanvas.SetActive(false);
         numpad.gameObject.SetActive(false);
@@ -111,8 +118,17 @@ public class GameStoryManager : MonoBehaviour {
         dialogCanvas.SetActive(true);
         activationCanvas.SetActive(false);
         inkManager.StartStory();
+        var location = DataManager.Game.Player.Location;
         inkManager.story.variablesState["PlayerName"] = DataManager.Game.Player.PlayerName;
-        var friendliness = inkManager.story.variablesState["Friendliness"];
+        var absoluteFriendliness = location.Friendliness;
+        inkManager.story.variablesState["Friendliness"] = absoluteFriendliness <= 0.3 ? "Low"
+                                                        : absoluteFriendliness >= 0.7 ? "High" 
+                                                        : "Normal";
+        inkManager.story.variablesState["Religion"] = location.Religion.Name;
+        inkManager.story.variablesState["Family"] = location.Family.Name;
+        inkManager.story.variablesState["Bantering"] = location.Bantering.Name;
+
+
         inkManager.Continue();
     }
     

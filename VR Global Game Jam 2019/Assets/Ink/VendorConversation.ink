@@ -1,67 +1,124 @@
 ...
  
--> Vendor.Conversation
+-> Main
 
 VAR PlayerName = "Bob"
-VAR NumpadValue = 0
+
 VAR TalkingAboutResource = "Water"
 VAR AmountFor = "Sell"
+VAR NumpadValue = 0
 VAR SuccessfulBuy = true
 VAR SuccessfulSell = false
-LIST Friendliness = Low, Normal, High
-~ Friendliness = Normal
 
-== Vendor ==
+VAR Friendliness = "Normal" //, Low, High
+VAR Religion = "Not Discussed" //, None, Praise Before Trading, Praise After Trading
+VAR Family = "Offer and Accept Visit" //, None, Offer and Accept Visit, Offer and Refuse Visit
+VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciated, Insults Insulting
 
-= Conversation
-
-{Hello {PlayerName}, how are you?|} What are we doing?
+== Main ==
+{
+    - Friendliness == "Normal": {Hello {PlayerName}, welcome.|} How can I help you?
+    - Friendliness == "Low": {Hello {PlayerName}...|} What do you want?
+    - Friendliness == "High": {Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
+ } 
 
 + [buy] -> buy
 + [sell] -> sell
 + [talk] -> talk
 + [goodbye] -> Goodbyes
 
-= buy
+== SelectResource ==
+
++ [Water]
+    ~ TalkingAboutResource = "Water"
+    ->->
++ [Steel]
+    ~ TalkingAboutResource = "Steel"
+    ->->
++ [Uranium]
+    ~ TalkingAboutResource = "Uranium"
+    ->->
++ [Liquid Oxygen]
+    ~ TalkingAboutResource = "LiquidOxygen"
+    ->->
++ [Lithium]
+    ~ TalkingAboutResource = "Lithium"
+    ->->
++ [Nothing]
+    -> Main
+
+== buy ==
 
 What are you buying?
 ~ AmountFor = "Buy"
 
-+ [Water]
-    ~ TalkingAboutResource = "Water"
-    -> SelectAmountBuy
-+ [Steel]
-    ~ TalkingAboutResource = "Steel"
-    -> SelectAmountBuy
-+ [Uranium]
-    ~ TalkingAboutResource = "Uranium"
-    -> SelectAmountBuy
-+ [Liquid Oxygen]
-    ~ TalkingAboutResource = "LiquidOxygen"
-    -> SelectAmountBuy
-+ [Lithium]
-    ~ TalkingAboutResource = "Lithium"
-    -> SelectAmountBuy
-+ [Nothing]
-    -> Conversation
-
-= sell
-
--> Conversation
+-> SelectResource -> SelectAmountBuy
 
 = SelectAmountBuy
 
-. #numpadShow #background:office
+How Much? #numpadShow
+[buying...] #buy
+
 {SuccessfulBuy : Awesome | Sorry, not enough money for that. }
 
--> Conversation
+-> Main
 
-= talk
+== sell ==
 
--> Conversation
+What are you selling?
+~ AmountFor = "Sell"
 
-= Goodbyes
+-> SelectResource -> SelectAmountSell
 
-See you later!
+= SelectAmountSell
+
+How Much? #numpadShow
+[selling...] #sell
+
+{SuccessfulBuy : Awesome | Sorry, you don't have that many. }
+
+
+-> Main
+
+== talk ==
+
+[What do you talk about?]
+
+ + Pra[y]ise the Lord.
+ -> Praise
+ + [Family]
+ -> Home
+ + [Joke]
+ -> Joke
+ + [Insult]
+ -> Insult
+ + [Back] -> Main
+
+= Praise
+TODO
+
+-> talk
+
+= Home
+How's your family? Are you all well?
+
+-> talk
+
+= Joke
+TODO
+
+-> talk
+
+= Insult
+TODO
+
+-> talk
+
+== Goodbyes ==
+{
+    - Friendliness == "Normal": Nice doing business with you.
+    - Friendliness == "Low": Get outta here, swindler.
+    - Friendliness == "High": Don't be a stranger. Say hi to your crew for me.
+ } 
 
 -> DONE

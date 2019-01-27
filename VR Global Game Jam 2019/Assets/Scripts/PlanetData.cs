@@ -78,6 +78,8 @@ public class PlanetData
         // Select vendor model
         VendorModel = rand.NextFrom(VendorModelType.Types);
 
+        Friendliness = 0.3f + rand.NextFloat() * 0.4f;
+
         // Pick social modifiers
         Religion = rand.NextFrom(SocialModifierReligion.Types);
         Family = rand.NextFrom(SocialModifierFamily.Types);

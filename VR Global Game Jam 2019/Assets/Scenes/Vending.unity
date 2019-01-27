@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 10.621, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.1, y: 1.589}
-  m_SizeDelta: {x: 200, y: 80}
+  m_AnchoredPosition: {x: 2.106, y: 1.622}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34877273
 MonoBehaviour:
@@ -293,6 +293,8 @@ MonoBehaviour:
   eventSystem: {fileID: 776086286}
   numpadCanvas: {fileID: 34877271}
   numpad: {fileID: 922957168}
+  numpadText: {fileID: 622648381}
+  numpadDelegate: {fileID: 34877273}
 --- !u!114 &179012091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,7 +1281,7 @@ GameObject:
   - component: {fileID: 622648382}
   - component: {fileID: 622648381}
   m_Layer: 0
-  m_Name: Text
+  m_Name: AmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,8 +1303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -43}
-  m_SizeDelta: {x: 200, y: 47.333332}
+  m_AnchoredPosition: {x: 100, y: -102.99999}
+  m_SizeDelta: {x: 200, y: 87.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622648381
 MonoBehaviour:
@@ -1455,8 +1457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -9.666666}
-  m_SizeDelta: {x: 200, y: 19.333334}
+  m_AnchoredPosition: {x: 100, y: -29.666664}
+  m_SizeDelta: {x: 200, y: 59.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &726964712
 MonoBehaviour:
@@ -1899,8 +1901,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -73.33333}
-  m_SizeDelta: {x: 200, y: 13.333333}
+  m_AnchoredPosition: {x: 100, y: -173.33333}
+  m_SizeDelta: {x: 200, y: 53.333332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &866448830
 MonoBehaviour:
@@ -1942,19 +1944,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 179012091}
-        m_MethodName: Continue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 179012090}
-        m_MethodName: NumpadHide
+        m_MethodName: DoneNumpad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3880,8 +3871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -33.333332}
-  m_SizeDelta: {x: 200, y: 66.666664}
+  m_AnchoredPosition: {x: 100, y: -73.33333}
+  m_SizeDelta: {x: 200, y: 146.66666}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2117074283
 MonoBehaviour:
