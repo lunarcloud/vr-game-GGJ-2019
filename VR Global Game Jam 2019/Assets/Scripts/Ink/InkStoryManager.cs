@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Ink.Runtime;
+using System.Linq;
 
 public class InkStoryManager : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class InkStoryManager : MonoBehaviour {
 
 	public Story story;
 
-	private Dictionary<string, System.Action<string>> tagProcessors = new Dictionary<string, System.Action<string>> ();
+	private Dictionary<string, System.Action<string[]>> tagProcessors = new Dictionary<string, System.Action<string[]>> ();
 
 	public UnityEngine.Events.UnityAction storyEndAction = delegate {};
     
@@ -74,17 +75,17 @@ public class InkStoryManager : MonoBehaviour {
 		return this.story.currentChoices.Count == 0 && !this.story.canContinue;
 	}
 
-	public void AddTagProcessor(string tag, System.Action<string> onTag) {
+	public void AddTagProcessor(string tag, System.Action<string[]> onTag) {
 		tagProcessors.Add (tag, onTag);
 	}
 
 	public void ProcessTags(List<string> tags) {
 		if (tags == null) return;
-		System.Action<string> processor;
+		System.Action<string[]> processor;
 		foreach (string tag in tags) {
 			string keyOfTag = tag.Split (':')[0];
 			if (tagProcessors.TryGetValue(keyOfTag, out processor)) {
-				string valueOfTag = tag.Split (':')[1];
+				var valueOfTag = tag.Split (':').Skip(1).ToArray();
 				processor.Invoke (valueOfTag);
 			}
 		}
