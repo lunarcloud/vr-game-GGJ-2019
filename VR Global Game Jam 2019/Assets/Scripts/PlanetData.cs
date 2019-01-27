@@ -25,7 +25,7 @@ public class PlanetData
 
         // Generate the star properties
         var starModifier = rand.NextFloat();
-        StarTemperature = StarType.Temperature.Interpolate(starModifier);
+        StarTemperature = Mathf.Round(StarType.Temperature.Interpolate(starModifier) / 100f) * 100f;
         StarColor = StarType.BlackBodyColor(StarTemperature);
         StarMass = StarType.Mass.Interpolate(starModifier);
         StarHabitableZone = StarType.Habitable.Interpolate(starModifier);

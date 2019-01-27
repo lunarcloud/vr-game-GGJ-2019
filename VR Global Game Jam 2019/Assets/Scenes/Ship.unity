@@ -1796,7 +1796,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020938658}
-  m_Mesh: {fileID: 4300000, guid: 1f143687ae3dc4eeea3d55a957814f71, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 21e863080625b4955a02db3f91460c2a, type: 2}
 --- !u!1 &1040175922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GvrEventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 1816646545, guid: 463285ecd6702471a909ba810832bf0e, type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 766346198, guid: 463285ecd6702471a909ba810832bf0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2344,10 +2348,6 @@ PrefabInstance:
     - target: {fileID: 766346198, guid: 463285ecd6702471a909ba810832bf0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1816646545, guid: 463285ecd6702471a909ba810832bf0e, type: 3}
-      propertyPath: m_FirstSelected
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463285ecd6702471a909ba810832bf0e, type: 3}
