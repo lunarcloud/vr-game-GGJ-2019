@@ -69,16 +69,16 @@ public class ShipMenu : MonoBehaviour
     public void LoadPlanetData(PlanetData data) {
         selectedPlanet = data;
 
-        DetailsText.text = "Name: " + data.PlanetName
-            + "\n Distance: " + data.PlanetDistance
-            + "\n Composition: " + data.PlanetComposition
-            + "\n Atmosphere: " + data.PlanetAtmosphere
-            + "\n Temperature: " + data.PlanetTemperature
+        DetailsText.text = $"Name: {data.PlanetName}"
+            + $"\nDistance: {data.PlanetDistance:F1} AU"
+            + $"\nComposition: {data.PlanetComposition}"
+            + $"\nAtmosphere: {data.PlanetAtmosphere}"
+            + $"\nTerrain: {data.PlanetTerrain}"
+            + $"\nTemperature: {data.PlanetTemperature:F1} °C"
             + "\n -------------------------"
-            + "\n Star: " + data.StarName
-            + "\n Star Type: " + data.StarType.Name
-            + "\n Star Temperature: " + data.StarTemperature
-            + "\n Star Color: " + data.StarColor
+            + $"\nStar: {data.StarName}"
+            + $"\nStar Type: {data.StarType.Name}"
+            + $"\nStar Temperature: {data.StarTemperature} °K"
             ;
 
         
