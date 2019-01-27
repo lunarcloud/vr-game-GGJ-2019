@@ -71,6 +71,11 @@ public class PlanetData
 
             ResourceCosts[res] = (long)Math.Round(cost);
         }
+
+        // Pick social modifiers
+        Religion = rand.NextFrom(SocialModifierReligion.Types);
+        Family = rand.NextFrom(SocialModifierFamily.Types);
+        Bantering = rand.NextFrom(SocialModifierBantering.Types);
     }
 
     public int Seed { get; }
@@ -110,6 +115,12 @@ public class PlanetData
     public int VisitCount { get; set; }
 
     public float Friendliness { get; set; }
+
+    public SocialModifierReligion Religion { get; }
+
+    public SocialModifierFamily Family { get; }
+
+    public SocialModifierBantering Bantering { get; }
 
     public Texture2D CreateWorldTexture()
     {
