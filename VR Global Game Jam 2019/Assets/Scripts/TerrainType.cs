@@ -1,23 +1,29 @@
 using UnityEngine;
 
-public abstract class TerrainType
+public abstract class TerrainType : IProbability
 {
-    public static readonly TerrainType BarrenMoon = new BarrenMoonType();
+    public static readonly TerrainType BarrenRock = new BarrenRockType();
     public static readonly TerrainType IceWorld = new IceWorldType();
     public static readonly TerrainType EarthWorld  = new EarthWorldType();
 
     public static readonly TerrainType[] Types =
     {
-        BarrenMoon,
+        BarrenRock,
         IceWorld,
         EarthWorld
     };
 
-    public abstract ITerrainGenerator GetTerrainGenerator(int seed, float temperature);
+    public abstract float Probability { get; }
+    public abstract string Name { get; }
+    public abstract ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter);
 
-    private class BarrenMoonType : TerrainType
+    private class BarrenRockType : TerrainType
     {
-        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature)
+        public override float Probability => .1f;
+        public override string Name => "Barren Rock";
+        public override string ToString() => Name;
+
+        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
             return new TerrainGenerator(seed);
         }
@@ -52,7 +58,11 @@ public abstract class TerrainType
 
     private class IceWorldType : TerrainType
     {
-        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature)
+        public override float Probability => .2f;
+        public override string Name => "Ice World";
+        public override string ToString() => Name;
+
+        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
             return new TerrainGenerator(seed);
         }
@@ -87,22 +97,34 @@ public abstract class TerrainType
 
     private class EarthWorldType : TerrainType
     {
-        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature)
+        public override float Probability => 1f;
+        public override string Name => "Earth-Like World";
+        public override string ToString() => Name;
+
+        public override ITerrainGenerator GetTerrainGenerator(int seed, float temperature, float diameter)
         {
-            return new TerrainGenerator(seed, temperature);
+            return new TerrainGenerator(seed, temperature, diameter);
         }
 
         private class TerrainGenerator : ITerrainGenerator
         {
-            private readonly ColorMap _terrainMap;
+            private readonly ColorMap _temperateMap;
+            private readonly ColorMap _polarMap;
             private readonly Perlin3D _terrainNoise;
+            private readonly Perlin3D _polarNoise;
             private readonly ColorMap _cloudMap;
             private readonly Perlin3D _cloudNoise;
+            private readonly float _temperature;
+            private readonly float _zMul;
 
 
-            public TerrainGenerator(int seed, float temperature)
+            public TerrainGenerator(int seed, float temperature, float diameter)
             {
-                _terrainMap = new ColorMap
+                _temperature = temperature;
+
+                _zMul = -30 / diameter;
+
+                _temperateMap = new ColorMap
                 {
                     { 0f, 0.0f, 0.0f, 0.4f, 1f },
                     { 0.58f, 0.0f, 0.0f, 0.6f, 1f },
@@ -116,11 +138,28 @@ public abstract class TerrainType
                     { 1f, 1.0f, 1.0f, 1.0f, 1f }
                 };
 
+                _polarMap = new ColorMap
+                {
+                    { 0f, 0.6f, 0.6f, 0.6f, 1f },
+                    { 0.6f, 0.6f, 0.6f, 0.6f, 1f },
+                    { 0.6f, 0.75f, 0.75f, 0.75f, 1f },
+                    { 0.61f, 0.7f, 0.7f, 0.7f, 1f },
+                    { 0.95f, 0.7f, 0.7f, 0.7f, 1f },
+                    { 1f, 1.0f, 1.0f, 1.0f, 1f }
+                };
+
                 _terrainNoise = new Perlin3D
                 {
                     Depth = 5,
                     Freq = 0.0001f,
                     Seed = seed
+                };
+
+                _polarNoise = new Perlin3D
+                {
+                    Depth = 5,
+                    Freq = 0.00003f,
+                    Seed = seed+1
                 };
 
                 _cloudMap = new ColorMap
@@ -135,13 +174,14 @@ public abstract class TerrainType
                 {
                     Depth = 5,
                     Freq = 0.0002f,
-                    Seed = seed + 1
+                    Seed = seed + 2
                 };
             }
 
             public Color GetColor(float x, float y, float z)
             {
-                var terrain = _terrainMap.Entry(_terrainNoise.Value(x, y, z));
+                var isPolar = _temperature + Mathf.Abs(z) * _zMul + _polarNoise.Value(x, y, z) * 20 < 0;
+                var terrain = (isPolar ? _polarMap : _temperateMap).Entry(_terrainNoise.Value(x, y, z));
                 var cloud = _cloudMap.Entry(_cloudNoise.Value(x, y, z));
                 return Color.Lerp(terrain, cloud, cloud.a);
             }

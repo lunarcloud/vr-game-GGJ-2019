@@ -11,6 +11,11 @@ public class AtmosphereType : IProbability
         {
             { ResourceType.Water, new RangeFloat(10f, 50f) },
             { ResourceType.LiquidOxygen, new RangeFloat(2f, 5f) }
+        },
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.BarrenRock,
+            TerrainType.IceWorld
         }
     };
 
@@ -21,7 +26,12 @@ public class AtmosphereType : IProbability
         HabitableModifier = new RangeFloat(0.9f, 1.1f),
         ResourceModifiers = new Dictionary<ResourceType, RangeFloat>
         {
-            {ResourceType.Water, new RangeFloat(0.1f, 0.8f) }
+            { ResourceType.Water, new RangeFloat(0.1f, 0.8f) }
+        },
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.IceWorld,
+            TerrainType.EarthWorld
         }
     };
 
@@ -29,28 +39,48 @@ public class AtmosphereType : IProbability
     {
         Probability = 0.1f,
         Name = "Methane",
-        HabitableModifier = new RangeFloat(0.8f, 1.3f)
+        HabitableModifier = new RangeFloat(0.8f, 1.3f),
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.IceWorld,
+            TerrainType.EarthWorld
+        }
     };
 
     public static readonly AtmosphereType Ammonia = new AtmosphereType
     {
         Probability = 0.1f,
         Name = "Ammonia",
-        HabitableModifier = new RangeFloat(0.7f, 1.1f)
+        HabitableModifier = new RangeFloat(0.7f, 1.1f),
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.IceWorld,
+            TerrainType.EarthWorld
+        }
     };
 
     public static readonly AtmosphereType Nitrogen = new AtmosphereType
     {
         Probability = 0.1f,
         Name = "Nitrogen",
-        HabitableModifier = new RangeFloat(0.7f, 1.6f)
+        HabitableModifier = new RangeFloat(0.7f, 1.6f),
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.IceWorld,
+            TerrainType.EarthWorld
+        }
     };
 
     public static readonly AtmosphereType HydrogenSulfide = new AtmosphereType
     {
         Probability = 0.1f,
         Name = "Hydrogen Sulfide",
-        HabitableModifier = new RangeFloat(0.8f, 1.3f)
+        HabitableModifier = new RangeFloat(0.8f, 1.3f),
+        AllowedTerrains = new List<TerrainType>
+        {
+            TerrainType.IceWorld,
+            TerrainType.EarthWorld
+        }
     };
 
     public static readonly AtmosphereType[] Types =
@@ -67,4 +97,6 @@ public class AtmosphereType : IProbability
     public string Name { get; private set; }
     public RangeFloat HabitableModifier { get; private set; }
     public Dictionary<ResourceType, RangeFloat> ResourceModifiers { get; private set; }
+    public List<TerrainType> AllowedTerrains { get; private set; }
+    public override string ToString() => Name;
 }

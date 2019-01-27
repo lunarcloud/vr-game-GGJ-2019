@@ -35,4 +35,5 @@ public class PlanetCompositionType : IProbability
     public float Probability { get; private set; }
     public string Name { get; private set; }
     public Dictionary<ResourceType, RangeFloat> ResourceModifiers { get; private set; }
+    public override string ToString() => Name;
 }

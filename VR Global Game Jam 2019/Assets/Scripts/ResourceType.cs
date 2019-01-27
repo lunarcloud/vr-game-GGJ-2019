@@ -69,4 +69,6 @@ public class ResourceType : IProbability
     public float Mass { get; private set; }
 
     public RangeFloat Cost { get; private set; }
+
+    public override string ToString() => Name;
 };

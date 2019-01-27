@@ -39,6 +39,9 @@ public class PlanetData
         // Select atmosphere
         PlanetAtmosphere = rand.NextFrom(AtmosphereType.Types);
 
+        // Select terrain type from atmosphere
+        PlanetTerrain = rand.NextFrom(PlanetAtmosphere.AllowedTerrains);
+
         // Generate planet distance
         PlanetDistance = StarHabitableZone * PlanetAtmosphere.HabitableModifier.Interpolate(rand.NextFloat());
 
@@ -92,6 +95,8 @@ public class PlanetData
 
     public AtmosphereType PlanetAtmosphere { get; }
 
+    public TerrainType PlanetTerrain { get; }
+
     public float PlanetDistance { get; }
 
     public float PlanetDiameter { get; }
@@ -102,11 +107,13 @@ public class PlanetData
 
     public Dictionary<ResourceType, long> ResourceCosts { get; }
 
+    public int VisitCount { get; set; }
+
     public Texture2D CreateWorldTexture()
     {
         var ret = new Texture2D(256, 256);
 
-        var gen = TerrainType.EarthWorld.GetTerrainGenerator(Seed, PlanetTemperature);
+        var gen = PlanetTerrain.GetTerrainGenerator(Seed, PlanetTemperature, PlanetDiameter);
 
         for (var ty = 0; ty < 256; ++ty)
         {
