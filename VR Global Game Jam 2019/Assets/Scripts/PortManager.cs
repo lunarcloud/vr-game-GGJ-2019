@@ -13,6 +13,10 @@ public class PortManager : MonoBehaviour
 
     public Material sky;
 
+    public Material PortGroundMaterial;
+
+    public Material PortOceanMaterial;
+
     public GameObject[] vendorLights;
 
     public AudioSource[] music;
@@ -38,6 +42,9 @@ public class PortManager : MonoBehaviour
     {
         DataManager = FindObjectOfType<GameDataManager>();
         Sun.color = DataManager.Game.Player.Location.StarColor;
+
+        PortGroundMaterial.color = DataManager.Game.Player.Location.PortGroundColor;
+        PortOceanMaterial.color = DataManager.Game.Player.Location.PortOceanColor;
 
         // Increment the number of visits - 1 means we're on the first visit
         DataManager.Game.Player.Location.VisitCount++;
