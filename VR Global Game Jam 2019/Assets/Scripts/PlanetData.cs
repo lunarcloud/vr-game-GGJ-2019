@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlanetData
@@ -127,11 +128,17 @@ public class PlanetData
 
     public float Friendliness { get; set; }
 
+    public float PriceModifier => 20f - Friendliness * 19f;
+
     public SocialModifierReligion Religion { get; }
 
     public SocialModifierFamily Family { get; }
 
     public SocialModifierBantering Bantering { get; }
+
+    public Dictionary<ResourceType, long> BuyPrices => ResourceCosts.ToDictionary(r => r.Key, r => (long) (Math.Round(r.Value + r.Value * PriceModifier)));
+
+    public Dictionary<ResourceType, long> SellPrices => ResourceCosts.ToDictionary(r => r.Key, r => (long)(Math.Round(r.Value - r.Value * PriceModifier)));
 
     public Texture2D CreateWorldTexture()
     {
@@ -155,5 +162,10 @@ public class PlanetData
         }
         ret.Apply();
         return ret;
+    }
+
+    public void ModifyFriendliness(float mod)
+    {
+        Friendliness = Mathf.Clamp(Friendliness + mod, 0f, 1f);
     }
 }
