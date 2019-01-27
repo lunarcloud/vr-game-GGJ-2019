@@ -19,6 +19,15 @@ public class ShipInventoryViewer : MonoBehaviour
     void Start()
     {
         DataManager = FindObjectOfType<GameDataManager>();
+        Reset();
+    }
+
+    public void Reset()
+    {
+        foreach (Transform child in ListContent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         moneyText.text = $" $ {(DataManager.Game.Player.Currency / 100)}.{(DataManager.Game.Player.Currency % 100):00}";
         foreach (var inventory in DataManager.Game.Player.Inventory)
         {

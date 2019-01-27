@@ -31,22 +31,18 @@ VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciat
 
 + [Water]
     ~ TalkingAboutResource = "Water"
-    ->->
 + [Steel]
     ~ TalkingAboutResource = "Steel"
-    ->->
 + [Uranium]
     ~ TalkingAboutResource = "Uranium"
-    ->->
 + [Lox]
     ~ TalkingAboutResource = "Lox"
-    ->->
 + [Lithium]
     ~ TalkingAboutResource = "Lithium"
-    ->->
 + [Nothing]
     -> Main
-
+    
+- ->->
 == buy ==
 
 What are you buying?
@@ -101,24 +97,60 @@ TODO
 
 = Home
 How's your family? Are you all well?
+{
+    - Family == "None": TODO 
+        bad #friendliness:-0.1
+    -> talk
+    - Family == "Offer and Accept Visit": TODO 
+    -> HomeVisitOffer
+    - Family == "Offer and Refuse Visit": TODO 
+    -> HomeVisitOffer
+}
 
--> talk
+= HomeVisitOffer
+You must visit the family.
+ + [Accept]
+    {
+        - Family == "Offer and Accept Visit": TODO 
+            good #friendliness:0.1
+        - Family == "Offer and Refuse Visit": TODO 
+            bad #friendliness:-0.1
+    }
+ + [Refuse] TODO
+    {
+        - Family == "Offer and Accept Visit": TODO
+            bad #friendliness:-0.1
+        - Family == "Offer and Refuse Visit": TODO 
+            good #friendliness:0.1
+    }
+- -> talk
 
 = Joke
-TODO
-
--> talk
+You Tell A Joke.
+{
+    - Bantering == "Jokes Appreciated": TODO 
+        good #friendliness:0.1
+    - Bantering == "Jokes Insulting": TODO 
+        bad #friendliness:-0.1
+    - else : Meh, heard better.
+}
+- -> talk
 
 = Insult
-TODO
-
--> talk
+You Insult their mother.
+{
+    - Bantering == "Insults Appreciated": TODO 
+        good #friendliness:0.1
+    - Bantering == "Insults Insulting": TODO 
+        bad #friendliness:-0.1
+    - else : Meh, heard better.
+}
+- -> talk
 
 == Goodbyes ==
 {
     - Friendliness == "Normal": Nice doing business with you.
     - Friendliness == "Low": Get outta here, swindler.
     - Friendliness == "High": Don't be a stranger. Say hi to your crew for me.
- } 
-
+ }
 -> DONE

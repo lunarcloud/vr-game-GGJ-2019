@@ -21,6 +21,8 @@ public class GameStoryManager : MonoBehaviour {
 
     public VendorManager vendorManager;
 
+    public ShipInventoryViewer inventoryViewer;
+
     private int ValueOfLastNumpad = 0;
 
     private bool pointingAtDialogBox = false;
@@ -55,6 +57,7 @@ public class GameStoryManager : MonoBehaviour {
 
                 inkManager.story.variablesState["SuccessfulBuy"] = true;
                 vendorManager.ShakeHands();
+                updateInventoryView();
             }
             else
             {
@@ -76,6 +79,7 @@ public class GameStoryManager : MonoBehaviour {
                 DataManager.Game.Player.Inventory[resource] -= quantity;
                 inkManager.story.variablesState["SuccessfulSell"] = true;
                 vendorManager.ShakeHands();
+                updateInventoryView();
             }
             else
             {
@@ -174,6 +178,10 @@ public class GameStoryManager : MonoBehaviour {
     {
         DataManager.Game.Player.Location.Friendliness = value;
         updateFriendliness();
+    }
+
+    private void updateInventoryView() {
+        //inventoryViewer.Reset();
     }
 
     private void Update()
