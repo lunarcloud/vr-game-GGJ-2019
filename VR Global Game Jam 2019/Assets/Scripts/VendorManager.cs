@@ -34,7 +34,14 @@ public class VendorManager : MonoBehaviour
 
         foreach (var vendor in Vendors)
         {
-            vendor.SetActive(vendor.name == DataManager.Game.Player.Location.VendorModel.Name);
+            var isActive = vendor.name == DataManager.Game.Player.Location.VendorModel.Name;
+            vendor.SetActive(isActive);
+            if (isActive)
+            {
+                var animator = vendor.GetComponent<Animator>();
+                animator.SetFloat("friendliness", DataManager.Game.Player.Location.Friendliness);
+                animator.SetBool("ShakingHand", false);
+            }
         }
     }
 
