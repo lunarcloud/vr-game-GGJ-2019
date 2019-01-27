@@ -15,6 +15,14 @@ public class PortManager : MonoBehaviour
 
     public GameObject[] vendorLights;
 
+    public AudioSource[] music;
+
+    public enum MusicTypes {
+        Temperate,
+        Hot,
+        Cold
+    }
+
     private void Awake()
     {
         vendorLights = GameObject.FindGameObjectsWithTag("VendorLights");
@@ -30,6 +38,19 @@ public class PortManager : MonoBehaviour
     {
         DataManager = FindObjectOfType<GameDataManager>();
         Sun.color = DataManager.Game.Player.Location.StarColor;
+
+        var temp = DataManager.Game.Player.Location.PlanetTemperature;
+        if (temp > 20) {
+            music[(int) MusicTypes.Hot].Play();
+        }
+        else if (temp < 9)
+        {
+            music[(int)MusicTypes.Cold].Play();
+        }
+        else
+        {
+            music[(int)MusicTypes.Temperate].Play();
+        }
     }
 
     // Update is called once per frame
