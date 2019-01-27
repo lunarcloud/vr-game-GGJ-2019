@@ -27,6 +27,8 @@ public class MainMenu : MonoBehaviour
 
     public GvrKeyboard keyboard;
 
+    public bool randomIsPlayer = false;
+
     private bool quitting = false;
 
     void Awake()
@@ -67,7 +69,8 @@ public class MainMenu : MonoBehaviour
         InputText.text = DataManager.Game.Player.PlayerName;
         keyboard.gameObject.SetActive(true);
         StartCoroutine(SetEditorText(DataManager.Game.Player.PlayerName));
-        
+
+        randomIsPlayer = true;
         InputCanvas.gameObject.SetActive(true);
         NextButton.gameObject.SetActive(true);
     }
@@ -82,19 +85,25 @@ public class MainMenu : MonoBehaviour
         DataManager.Game.Player.PlayerName = InputText.text;
         
         InputTitle.text = "Input Ship Name";
-        InputText.text = DataManager.Game.Player.ShipName;
         keyboard.gameObject.SetActive(true);
         StartCoroutine(SetEditorText(DataManager.Game.Player.ShipName));
-        
 
+        randomIsPlayer = false;
         NextButton.gameObject.SetActive(false);
         PlayButton.gameObject.SetActive(true);
+    }
+    
+
+    public void RandomizeInput() {
+        var newName = randomIsPlayer ? CaptainNameGenerator.Create() : ShipNameGenerator.Create();
+        StartCoroutine(SetEditorText(newName));
     }
 
     private IEnumerator SetEditorText(string text)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         keyboard.EditorText = text;
+        InputText.text = text;
     }
 
     public void PlayGame()

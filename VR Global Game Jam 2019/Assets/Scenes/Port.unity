@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 383539425}
   - component: {fileID: 383539424}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ShipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,8 +607,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1390381155}
-        m_MethodName: ToVendor
-        m_Mode: 3
+        m_MethodName: BackToShip
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2399,7 +2399,7 @@ GameObject:
   - component: {fileID: 1780111499}
   - component: {fileID: 1780111502}
   m_Layer: 0
-  m_Name: Button
+  m_Name: VendorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2718,7 +2718,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &1942558993
 GameObject:

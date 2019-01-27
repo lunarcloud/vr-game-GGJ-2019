@@ -20,23 +20,14 @@ public class KeyboardDelegateVendorMenu : GvrKeyboardDelegateBase
     {
     }
     
-
     public override void OnKeyboardShow()
     {
-        EventHandler handler = KeyboardShown;
-        if (handler != null)
-        {
-            handler(this, null);
-        }
+        KeyboardShown?.Invoke(this, null);
     }
 
     public override void OnKeyboardHide()
     {
-        EventHandler handler = KeyboardHidden;
-        if (handler != null)
-        {
-            handler(this, null);
-        }
+        KeyboardHidden?.Invoke(this, null);
     }
 
     public override void OnKeyboardUpdate(string text)
@@ -49,11 +40,7 @@ public class KeyboardDelegateVendorMenu : GvrKeyboardDelegateBase
 
     public override void OnKeyboardEnterPressed(string text)
     {
-        EventHandler handler = KeyboardEnterPressed;
-        if (handler != null)
-        {
-            handler(this, null);
-        }
+        KeyboardEnterPressed?.Invoke(this, null);
     }
 
     public override void OnKeyboardError(GvrKeyboardError errCode)
