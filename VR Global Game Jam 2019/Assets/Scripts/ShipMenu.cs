@@ -35,7 +35,7 @@ public class ShipMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject PricesListParent;
-
+    
     private void Awake()
     {
         BlackoutCover.FadeOut();
