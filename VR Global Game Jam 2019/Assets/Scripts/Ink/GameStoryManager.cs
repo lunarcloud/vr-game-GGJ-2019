@@ -37,7 +37,7 @@ public class GameStoryManager : MonoBehaviour {
             var quantity = ValueOfLastNumpad;
             Debug.Log($"Buying {quantity} of {resourceName}.");
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
-            var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
+            var resourceCost = DataManager.Game.Player.Location.BuyPrices[resource];
 
             if (DataManager.Game.Player.Currency >= resourceCost * quantity)
             {
@@ -61,7 +61,7 @@ public class GameStoryManager : MonoBehaviour {
             var quantity = ValueOfLastNumpad;
             Debug.Log($"Selling {quantity} of {resourceName}.");
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
-            var resourceCost = DataManager.Game.Player.Location.ResourceCosts[resource];
+            var resourceCost = DataManager.Game.Player.Location.SellPrices[resource];
 
             if (DataManager.Game.Player.Inventory.ContainsKey(resource)
                 && DataManager.Game.Player.Inventory[resource] >= quantity)

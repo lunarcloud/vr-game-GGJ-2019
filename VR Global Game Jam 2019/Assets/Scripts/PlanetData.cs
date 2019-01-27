@@ -130,7 +130,7 @@ public class PlanetData
 
     public float Friendliness { get; set; }
 
-    public float PriceModifier => 20f - Friendliness * 19f;
+    public float PriceModifier => 0.2f - Friendliness * 0.19f;
 
     public SocialModifierReligion Religion { get; }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
 public class ShipMenu : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class ShipMenu : MonoBehaviour
 
         shipPlack.text = DataManager.Game.Player.ShipName;
 
-        foreach (var planet in DataManager.Game.Planets)
+        foreach (var planet in DataManager.Game.Planets.OrderBy(p => DataManager.Game.Player.DistanceTo(p)))
         {
             AddPlanetItem(
                 planet.PlanetName,
@@ -78,7 +79,8 @@ public class ShipMenu : MonoBehaviour
         selectedPlanet = data;
 
         DetailsText.text = $"Name: {data.PlanetName}"
-            + $"\nDistance: {data.PlanetDistance:F1} AU"
+            + $"\nTravel/Fuel Cost: {DataManager.Game.Player.DistanceTo(data)}"
+            + $"\nDistance from Star: {data.PlanetDistance:F1} AU"
             + $"\nComposition: {data.PlanetComposition}"
             + $"\nAtmosphere: {data.PlanetAtmosphere}"
             + $"\nTerrain: {data.PlanetTerrain}"
@@ -95,9 +97,14 @@ public class ShipMenu : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        foreach (var resource in data.ResourceCosts)
+
+        var buyPrices = data.BuyPrices;
+        var sellPrices = data.SellPrices;
+        foreach (var resource in ResourceType.Types)
         {
-            AddPriceItem($" {resource.Key.Name} : $ {(resource.Value / 100)}.{(resource.Value % 100):00}");
+            var buyPrice = buyPrices[resource];
+            var sellPrice = sellPrices[resource];
+            AddPriceItem($" {resource.Name} : $ {(buyPrice / 100)}.{(buyPrice % 100):00} / $ {(sellPrice / 100)}.{(sellPrice % 100):00}");
         }
 
         PlanetPreview.SetActive(true);
