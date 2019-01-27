@@ -112,13 +112,13 @@ How Much? #numpadShow
 = Home
 How's your family? Are you all well?
 {
-    - Family == "None": TODO 
-        bad #friendliness:-0.1
-    -> talk
-    - Family == "Offer and Accept Visit": TODO 
-    -> HomeVisitOffer
-    - Family == "Offer and Refuse Visit": TODO 
-    -> HomeVisitOffer
+    - Family == "None": 
+        I don't like to discuss family with business partners. #friendliness:-0.1
+        -> talk
+    - Family == "Offer and Accept Visit": 
+        -> HomeVisitOffer
+    - Family == "Offer and Refuse Visit": 
+        -> HomeVisitOffer
 }
 
 = HomeVisitOffer
