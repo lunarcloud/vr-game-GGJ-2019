@@ -13,4 +13,11 @@ public class PlayerData
     public Texture2D LocationTexture { get; set; }
 
     public Inventory Inventory { get; } = new Inventory();
+
+    public float Fuel { get; set; } = 50f;
+
+    public float DistanceTo(PlanetData planet)
+    {
+        return Mathf.Ceil(Vector3.Distance(Location.Location, planet.Location));
+    }
 }
