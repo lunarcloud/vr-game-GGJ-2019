@@ -72,7 +72,6 @@ How Much? #numpadShow
 
 == talk ==
 What do you talk about?
- * Pra[y]ise the Lord.
  -> Praise
  * [Family]
  -> Home
@@ -80,7 +79,7 @@ What do you talk about?
  -> Joke
  * [Insult]
  -> Insult
- + [Back] 
+ + [Back]
  -> Main
 
 = Praise
