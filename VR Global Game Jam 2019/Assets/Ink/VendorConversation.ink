@@ -132,7 +132,7 @@ You tell a joke:
 "<>{~-> Joke1 -> JokeEnd|-> Joke2 -> JokeEnd|-> Joke3 -> JokeEnd|-> Joke4 -> JokeEnd|-> Joke5 -> JokeEnd|-> Joke6 -> JokeEnd}
 
 = JokeEnd
-<>"
+<>" 
 {
     - Bantering == "Jokes Appreciated": They laugh heartily. #friendliness:0.1
     - Bantering == "Jokes Insulting": They frown at you. #friendliness:-0.1
