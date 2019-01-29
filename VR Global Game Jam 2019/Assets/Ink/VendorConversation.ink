@@ -120,7 +120,7 @@ What do you talk about?
         - Family == "Offer and Accept Visit": "Wonderful! They can't wait. It'll be great," they say. #friendliness:0.1
         - Family == "Offer and Refuse Visit": They frown, you don't refuse a visit in this culture. #friendliness:-0.1
     }
- + [Refuse] TODO
+ + [Refuse]
     {
         - Family == "Offer and Accept Visit": They frown, you've broken the social norm of politely declining. #friendliness:-0.1
         - Family == "Offer and Refuse Visit": They smile. "Well, maybe next time"  #friendliness:0.1
@@ -153,8 +153,8 @@ You give them a good ribbing.
 
 == Goodbyes ==
 "<>{
-    - Friendliness == "Normal": Nice doing business with you.
-    - Friendliness == "Low": Get outta here, swindler.
-    - Friendliness == "High": Don't be a stranger. Say hi to your crew for me.
+    - Friendliness == "Normal":Nice doing business with you.
+    - Friendliness == "Low":Get outta here, swindler.
+    - Friendliness == "High":Don't be a stranger. Say hi to your crew for me.
 }<>"
 -> DONE
