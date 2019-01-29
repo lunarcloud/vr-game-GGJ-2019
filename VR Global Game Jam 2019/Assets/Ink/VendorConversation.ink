@@ -1,5 +1,5 @@
+INCLUDE Jokes.ink
 ...
- 
 -> Main
 
 VAR PlayerName = "Bob"
@@ -18,11 +18,11 @@ VAR Family = "Offer and Accept Visit" //, None, Offer and Accept Visit, Offer an
 VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciated, Insults Insulting
 
 == Main ==
-{
+"<>{
     - Friendliness == "Normal": {Hello {PlayerName}, welcome.|} How can I help you?
     - Friendliness == "Low": {Hello {PlayerName}...|} What do you want?
     - Friendliness == "High": {Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
- } 
+} <>" they say.
 
 + [buy] -> buy
 + [sell] -> sell
@@ -46,7 +46,6 @@ VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciat
     
 - ->->
 == buy ==
-
 What are you buying?
 ~ AmountFor = "Buy"
 
@@ -54,34 +53,25 @@ What are you buying?
 
 = SelectAmountBuy
 
-How Much? #numpadShow
+"How Much?" #numpadShow
 [buying...] #buy
-
-{SuccessfulBuy : Awesome | Sorry, not enough money for that. }
-
+{SuccessfulBuy : Awesome | Sorry, not enough money for that. } #numpadHide
 -> Main
 
 == sell ==
-
 What are you selling?
 ~ AmountFor = "Sell"
 
 -> SelectResource -> SelectAmountSell
 
 = SelectAmountSell
-
 How Much? #numpadShow
 [selling...] #sell
-
-{SuccessfulBuy : Awesome | Sorry, you don't have that many. }
-
-
+{SuccessfulBuy : Awesome | Sorry, you don't have that many. } #numpadHide
 -> Main
 
 == talk ==
-
-[What do you talk about?]
-
+What do you talk about?
  * Pra[y]ise the Lord.
  -> Praise
  * [Family]
@@ -90,7 +80,8 @@ How Much? #numpadShow
  -> Joke
  * [Insult]
  -> Insult
- + [Back] -> Main
+ + [Back] 
+ -> Main
 
 = Praise
 {
@@ -110,10 +101,11 @@ How Much? #numpadShow
 -> talk
 
 = Home
-How's your family? Are you all well?
+"How's your family? Are you all well?" you ask.
+
 {
     - Family == "None": 
-        I don't like to discuss family with business partners. #friendliness:-0.1
+        "I don't like to discuss family with business partners," they say. #friendliness:-0.1
         -> talk
     - Family == "Offer and Accept Visit": 
         -> HomeVisitOffer
@@ -122,41 +114,47 @@ How's your family? Are you all well?
 }
 
 = HomeVisitOffer
-You must visit the family.
+"You must visit the family," they say.
  + [Accept]
     {
-        - Family == "Offer and Accept Visit": Wonderful! They can't wait. It'll be great. #friendliness:0.1
+        - Family == "Offer and Accept Visit": "Wonderful! They can't wait. It'll be great," they say. #friendliness:0.1
         - Family == "Offer and Refuse Visit": They frown, you don't refuse a visit in this culture. #friendliness:-0.1
     }
  + [Refuse] TODO
     {
         - Family == "Offer and Accept Visit": They frown, you've broken the social norm of politely declining. #friendliness:-0.1
-        - Family == "Offer and Refuse Visit": Well, maybe next time. They smile. #friendliness:0.1
+        - Family == "Offer and Refuse Visit": They smile. "Well, maybe next time"  #friendliness:0.1
     }
 - -> talk
 
 = Joke
-You Tell A Joke.
+You tell a joke:
+"<>{~-> Joke1 -> JokeEnd|-> Joke2 -> JokeEnd|-> Joke3 -> JokeEnd|-> Joke4 -> JokeEnd|-> Joke5 -> JokeEnd|-> Joke6 -> JokeEnd}
+
+= JokeEnd
+<>"
 {
     - Bantering == "Jokes Appreciated": They laugh heartily. #friendliness:0.1
     - Bantering == "Jokes Insulting": They frown at you. #friendliness:-0.1
-    - else : Meh, heard better.
+    - Bantering == "Insults Appreciated": "Not my kind of humor," they say.
+    - Bantering == "Insults Insulting": "Meh, heard better," They say.
 }
-- -> talk
+-> talk
 
 = Insult
 You give them a good ribbing.
 {
     - Bantering == "Insults Appreciated": They laugh heartily.  #friendliness:0.1
     - Bantering == "Insults Insulting": They frown at you. #friendliness:-0.1
-    - else : Meh, heard better.
+    - Bantering == "Jokes Appreciated": "Not my kind of humor," they say.
+    - Bantering == "Jokes Insulting": "Meh, heard better," They say.
 }
-- -> talk
+-> talk
 
 == Goodbyes ==
-{
+"<>{
     - Friendliness == "Normal": Nice doing business with you.
     - Friendliness == "Low": Get outta here, swindler.
     - Friendliness == "High": Don't be a stranger. Say hi to your crew for me.
- }
+}<>"
 -> DONE

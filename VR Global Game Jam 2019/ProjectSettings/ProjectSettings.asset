@@ -113,7 +113,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 1.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -148,7 +148,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: org.SamAndMalcolm.Homeworlds
+    Android: org.SamAndMalcolm.HomeworldsPlus
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
@@ -256,7 +256,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: a2389bdff958cbc4e8bce9f329215436, type: 3}
+      m_Icon: {fileID: 2800000, guid: 973c0db500bf84441ae017d9d975b1a5, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -695,8 +695,10 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   vrEditorSettings:
     daydream:
-      daydreamIconForeground: {fileID: 0}
-      daydreamIconBackground: {fileID: 0}
+      daydreamIconForeground: {fileID: 2800000, guid: 90a93c4e9d91b6f44becfb8d230029ce,
+        type: 3}
+      daydreamIconBackground: {fileID: 2800000, guid: 0de5bec99d4255f4e9ba2721ee5671a8,
+        type: 3}
   cloudServicesEnabled:
     UNet: 1
   luminIcon:

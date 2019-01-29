@@ -63,6 +63,8 @@ public class GameStoryManager : MonoBehaviour {
             {
                 inkManager.story.variablesState["SuccessfulBuy"] = false;
             }
+            inkManager.Continue();
+            dialogCanvas.SetActive(true);
         });
 
         inkManager.AddTagProcessor("sell", delegate (string[] values) {
@@ -85,6 +87,8 @@ public class GameStoryManager : MonoBehaviour {
             {
                 inkManager.story.variablesState["SuccessfulSell"] = false;
             }
+            inkManager.Continue();
+            dialogCanvas.SetActive(true);
         });
 
         inkManager.AddTagProcessor("friendliness", delegate (string[] values) {
@@ -100,8 +104,12 @@ public class GameStoryManager : MonoBehaviour {
         inkManager.AddTagProcessor("numpadShow", delegate (string[] values) {
             NumpadShow();
         });
+        inkManager.AddTagProcessor("numpadHide", delegate (string[] values) {
+            NumpadHide();
+        });
+
         numpadDelegate.KeyboardEnterPressed += (s, e) => {
-            DoneNumpad();
+            NumpadValueAccepted();
         };
     }
 
@@ -120,22 +128,21 @@ public class GameStoryManager : MonoBehaviour {
         numpad.gameObject.SetActive(true);
     }
 
-    public void DoneNumpad() {
+    public void NumpadValueAccepted() {
         var success = int.TryParse(numpad.EditorText, out ValueOfLastNumpad);
         if (!success)
         {
             Debug.LogError($"{numpad.EditorText} can't be parsed as an int!");
             ValueOfLastNumpad = 0;
         }
-        NumpadHide();
         inkManager.Continue();
+        NumpadHide();
     }
 
     private void NumpadHide()
     {
         numpad.ClearText();
         numpadText.text = "";
-        dialogCanvas.SetActive(true);
         numpadCanvas.SetActive(false);
         inventoryCanvas.SetActive(false);
         numpad.gameObject.SetActive(false);
