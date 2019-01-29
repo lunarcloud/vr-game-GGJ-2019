@@ -72,6 +72,7 @@ How Much? #numpadShow
 
 == talk ==
 What do you talk about?
+ * [Pray]
  -> Praise
  * [Family]
  -> Home
