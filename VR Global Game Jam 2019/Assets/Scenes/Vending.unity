@@ -1217,7 +1217,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f25e60e5bb7785342af6dd9eee1a22b1, type: 2}
     - target: {fileID: 9500000, guid: 0e2e694c04c3e5d49be6e76f9e3faf40, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 0e2e694c04c3e5d49be6e76f9e3faf40, type: 3}
       propertyPath: m_Avatar
@@ -3215,7 +3215,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f25e60e5bb7785342af6dd9eee1a22b1, type: 2}
     - target: {fileID: 9500000, guid: 84227de0649c6fd449fa8d24957b6faa, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 84227de0649c6fd449fa8d24957b6faa, type: 3}
       propertyPath: m_Avatar
@@ -3860,7 +3860,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f25e60e5bb7785342af6dd9eee1a22b1, type: 2}
     - target: {fileID: 9500000, guid: 7619113d6f28cbe4b8ed04e74f51f862, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 7619113d6f28cbe4b8ed04e74f51f862, type: 3}
       propertyPath: m_Avatar
@@ -3963,7 +3963,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f25e60e5bb7785342af6dd9eee1a22b1, type: 2}
     - target: {fileID: 9500000, guid: 9b2103a75c38ad149bfdde25b98d48df, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b2103a75c38ad149bfdde25b98d48df, type: 3}
