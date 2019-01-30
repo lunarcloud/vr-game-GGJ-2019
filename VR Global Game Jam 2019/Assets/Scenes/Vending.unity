@@ -3523,7 +3523,7 @@ MonoBehaviour:
   m_Content: {fileID: 88688991}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 0
+  m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -6112,11 +6112,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493280993}
     m_Modifications:
-    - target: {fileID: 114465183868844448, guid: 343ddb695944c4982a9843315525127c,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 224863837777670568, guid: 343ddb695944c4982a9843315525127c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6207,6 +6202,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114465183868844448, guid: 343ddb695944c4982a9843315525127c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 343ddb695944c4982a9843315525127c, type: 3}
 --- !u!1 &1713280190

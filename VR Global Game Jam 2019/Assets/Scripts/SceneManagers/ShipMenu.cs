@@ -57,6 +57,10 @@ public class ShipMenu : MonoBehaviour
                 delegate { LoadPlanetData(planet); });
         }
 
+        var sizeDelta = PlanetsListParent.GetComponent<RectTransform>().sizeDelta;
+        sizeDelta.y = (DataManager.Game.Planets.Length * (40 + 5)) + 10;
+        PlanetsListParent.GetComponent<RectTransform>().sizeDelta = sizeDelta;
+
         foreach (var drawing in KidsDrawings) {
             drawing.SetActive(false);
         }
