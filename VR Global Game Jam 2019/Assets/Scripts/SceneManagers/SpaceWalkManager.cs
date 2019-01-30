@@ -9,7 +9,7 @@ public class SpaceWalkManager : MonoBehaviour
     public PanelFade BlackoutCover;
 
 
-    private void Awake()
+    private void Start()
     {
         BlackoutCover.FadeOut();
     }

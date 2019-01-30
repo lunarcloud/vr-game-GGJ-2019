@@ -19,12 +19,12 @@ public class VendorManager : MonoBehaviour
 
     public GameObject[] Vendors;
 
-    public Animator currentAnimator;
+    private Animator currentAnimator;
     
     private void Awake()
     {
-        BlackoutCover.FadeOut();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +45,8 @@ public class VendorManager : MonoBehaviour
                 currentAnimator.SetBool("ShakingHand", false);
             }
         }
+
+        BlackoutCover.FadeOut();
     }
 
     // Update is called once per frame

@@ -15,21 +15,11 @@ public class KeyboardDelegateVendorMenu : GvrKeyboardDelegateBase
     public event EventHandler KeyboardEnterPressed;
 
     private const string DD_KEYBOARD_NOT_INSTALLED_MSG = "Please update the Daydream Keyboard app from the Play Store.";
-
-    void Awake()
-    {
-    }
     
-    public override void OnKeyboardShow()
-    {
-        KeyboardShown?.Invoke(this, null);
-    }
+    public override void OnKeyboardShow() => KeyboardShown?.Invoke(this, null);
 
-    public override void OnKeyboardHide()
-    {
-        KeyboardHidden?.Invoke(this, null);
-    }
-
+    public override void OnKeyboardHide() => KeyboardHidden?.Invoke(this, null);
+    
     public override void OnKeyboardUpdate(string text)
     {
         if (KeyboardText != null)
@@ -38,10 +28,7 @@ public class KeyboardDelegateVendorMenu : GvrKeyboardDelegateBase
         }
     }
 
-    public override void OnKeyboardEnterPressed(string text)
-    {
-        KeyboardEnterPressed?.Invoke(this, null);
-    }
+    public override void OnKeyboardEnterPressed(string text) => KeyboardEnterPressed?.Invoke(this, null);
 
     public override void OnKeyboardError(GvrKeyboardError errCode)
     {

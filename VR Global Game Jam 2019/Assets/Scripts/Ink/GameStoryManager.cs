@@ -12,11 +12,13 @@ public class GameStoryManager : MonoBehaviour {
     public GameObject dialogCanvas;
     public GameObject activationCanvas;
     public UnityEngine.EventSystems.EventSystem eventSystem;
+    
+    private GvrModeManager GvrMode;
+    public GvrKeyboard daydreamNumpad;
+    public KeyboardDelegateVendorMenu daydreamNumpadDelegate;
 
     public GameObject numpadCanvas;
-    public GvrKeyboard numpad;
     public Text numpadText;
-    public KeyboardDelegateVendorMenu numpadDelegate;
     public GameObject inventoryCanvas;
 
     public VendorManager vendorManager;
@@ -32,6 +34,7 @@ public class GameStoryManager : MonoBehaviour {
     void Awake ()
     {
         DataManager = FindObjectOfType<GameDataManager>();
+        GvrMode = FindObjectOfType<GvrModeManager>();
         
         inkManager.storyEndAction = delegate {
             activationCanvas.SetActive(true);
@@ -101,38 +104,39 @@ public class GameStoryManager : MonoBehaviour {
             updateFriendliness(DataManager.Game.Player.Location.Friendliness + updatedValue);
         });
 
-        inkManager.AddTagProcessor("numpadShow", delegate (string[] values) {
-            NumpadShow();
-        });
-        inkManager.AddTagProcessor("numpadHide", delegate (string[] values) {
-            NumpadHide();
-        });
+        inkManager.AddTagProcessor("numpadShow", delegate (string[] values) { NumpadShow(); });
+        inkManager.AddTagProcessor("numpadHide", delegate (string[] values) { NumpadHide(); });
 
-        numpadDelegate.KeyboardEnterPressed += (s, e) => {
-            NumpadValueAccepted();
-        };
+        if (GvrMode.IsDaydream)
+        {
+            daydreamNumpadDelegate.KeyboardEnterPressed += (s, e) => { NumpadValueAccepted(); };
+        }
     }
 
     private void Start()
     {
+        NumpadHide();
         updateFriendlinessUI();
     }
 
     public void NumpadShow()
     {
-        numpad.ClearText();
         numpadText.text = "";
         dialogCanvas.SetActive(false);
         numpadCanvas.SetActive(true);
         inventoryCanvas.SetActive(true);
-        numpad.gameObject.SetActive(true);
+        if (GvrMode.IsDaydream)
+        {
+            daydreamNumpad.ClearText();
+            daydreamNumpad.gameObject.SetActive(true);
+        }
     }
 
     public void NumpadValueAccepted() {
-        var success = int.TryParse(numpad.EditorText, out ValueOfLastNumpad);
+        var success = int.TryParse(numpadText.text, out ValueOfLastNumpad);
         if (!success)
         {
-            Debug.LogError($"{numpad.EditorText} can't be parsed as an int!");
+            Debug.LogError($"{numpadText.text} can't be parsed as an int!");
             ValueOfLastNumpad = 0;
         }
         inkManager.Continue();
@@ -141,11 +145,15 @@ public class GameStoryManager : MonoBehaviour {
 
     private void NumpadHide()
     {
-        numpad.ClearText();
         numpadText.text = "";
         numpadCanvas.SetActive(false);
         inventoryCanvas.SetActive(false);
-        numpad.gameObject.SetActive(false);
+
+        if (GvrMode.IsDaydream)
+        {
+            daydreamNumpad.ClearText();
+            daydreamNumpad.gameObject.SetActive(false);
+        }
     }
 
     public void StartStory()

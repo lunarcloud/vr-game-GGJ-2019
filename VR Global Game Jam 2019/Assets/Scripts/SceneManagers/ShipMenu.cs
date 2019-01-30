@@ -41,14 +41,12 @@ public class ShipMenu : MonoBehaviour
     
     private void Awake()
     {
-        BlackoutCover.FadeOut();
+        DataManager = FindObjectOfType<GameDataManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        DataManager = FindObjectOfType<GameDataManager>();
-
         shipPlack.text = DataManager.Game.Player.ShipName;
 
         foreach (var planet in DataManager.Game.Planets.OrderBy(p => DataManager.Game.Player.DistanceTo(p)))
@@ -66,6 +64,7 @@ public class ShipMenu : MonoBehaviour
         KidsDrawings[random.Next(0, KidsDrawings.Length)].SetActive(true);
 
         LoadPlanetData(DataManager.Game.Player.Location);
+        BlackoutCover.FadeOut();
     }
     
     // Update is called once per frame

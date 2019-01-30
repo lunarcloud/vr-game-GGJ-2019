@@ -19,22 +19,28 @@ public class MainMenu : MonoBehaviour
 
     public Text InputText;
 
+    public Text VRModeText;
+
     public Canvas InputCanvas;
 
     public Button NextButton;
 
     public Button PlayButton;
 
-    public GvrKeyboard keyboard;
+    public GvrKeyboard daydreamKeyboard;
 
     public bool randomIsPlayer = false;
 
     private bool quitting = false;
 
+    private GvrModeManager GvrMode;
+
     void Awake()
     {
-        keyboard.gameObject.SetActive(false);
+        GvrMode = FindObjectOfType<GvrModeManager>();
+        Input.backButtonLeavesApp = true;
 
+        daydreamKeyboard.gameObject.SetActive(false);
         NewGameButton.gameObject.SetActive(true);
         ContinueButton.gameObject.SetActive(true);
         QuitButton.gameObject.SetActive(true);
@@ -45,13 +51,17 @@ public class MainMenu : MonoBehaviour
         //if (DataManager.hasExistingData) {
         //    ContinueButton.interactable = true;
         //}
+    }
 
+    private void Start()
+    {
+        VRModeText.text = "Active VR Mode: " + (GvrMode.IsDaydream ? "Daydream" : "Cardboard");
         BlackoutCover.FadeOut();
     }
 
     private void Update()
     {
-        if (GvrControllerInput.AppButton)
+        if (Input.GetKeyDown(KeyCode.Escape) || GvrControllerInput.AppButton)
         {
             Quit();
         }
@@ -67,7 +77,8 @@ public class MainMenu : MonoBehaviour
 
         InputTitle.text = "Input Captain Name";
         InputText.text = DataManager.Game.Player.PlayerName;
-        keyboard.gameObject.SetActive(true);
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.gameObject.SetActive(true);
         StartCoroutine(SetEditorText(DataManager.Game.Player.PlayerName));
 
         randomIsPlayer = true;
@@ -75,18 +86,22 @@ public class MainMenu : MonoBehaviour
         NextButton.gameObject.SetActive(true);
     }
  
-    public void ShowKeyboard() {
-        keyboard.gameObject.SetActive(true);
+    public void ShowKeyboard()
+    {
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.gameObject.SetActive(true);
     }
 
     public void PlayerNameGood()
     {
-        keyboard.gameObject.SetActive(false);
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.gameObject.SetActive(false);
         DataManager.Game.Player.PlayerName = InputText.text;
         
         InputTitle.text = "Input Ship Name";
         InputText.text = DataManager.Game.Player.ShipName;
-        keyboard.gameObject.SetActive(true);
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.gameObject.SetActive(true);
         StartCoroutine(SetEditorText(DataManager.Game.Player.ShipName));
 
         randomIsPlayer = false;
@@ -104,12 +119,14 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         InputText.text = text;
-        keyboard.EditorText = text;
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.EditorText = text;
     }
 
     public void PlayGame()
     {
-        keyboard.gameObject.SetActive(false);
+        if (GvrMode.IsDaydream)
+            daydreamKeyboard.gameObject.SetActive(false);
         NextButton.gameObject.SetActive(false);
         PlayButton.gameObject.SetActive(false);
 
@@ -157,9 +174,15 @@ public class MainMenu : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        GvrDaydreamApi.LaunchVrHomeAsync((success) => {
-            //Application.Quit(); // This results in dropping to android home before going back into daydream home.
-        });
+        if (GvrIntent.IsLaunchedFromVr()) {
+            GvrDaydreamApi.LaunchVrHomeAsync((success) => {
+                if (!success) {
+                    Application.Quit();
+                }
+            });
+        } else {
+            Application.Quit();
+        }
 #endif
     }
 }

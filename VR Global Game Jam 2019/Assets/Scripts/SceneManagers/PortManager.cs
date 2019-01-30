@@ -29,18 +29,17 @@ public class PortManager : MonoBehaviour
 
     private void Awake()
     {
+        DataManager = FindObjectOfType<GameDataManager>();
         vendorLights = GameObject.FindGameObjectsWithTag("VendorLights");
         foreach (var light in vendorLights)
         {
             light.SetActive(false);
         }
-        BlackoutCover.FadeOut();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        DataManager = FindObjectOfType<GameDataManager>();
         Sun.color = DataManager.Game.Player.Location.StarColor;
 
         PortGroundMaterial.color = DataManager.Game.Player.Location.PortGroundColor;
@@ -61,6 +60,7 @@ public class PortManager : MonoBehaviour
         {
             music[(int)MusicTypes.Temperate].Play();
         }
+        BlackoutCover.FadeOut();
     }
 
     // Update is called once per frame
