@@ -19,10 +19,10 @@ VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciat
 
 == Main ==
 "<>{
-    - Friendliness == "Normal": {Hello {PlayerName}, welcome.|} How can I help you?
-    - Friendliness == "Low": {Hello {PlayerName}...|} What do you want?
-    - Friendliness == "High": {Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
-} <>" they say.
+    - Friendliness == "Normal":{Hello {PlayerName}, welcome.|} How can I help you?
+    - Friendliness == "Low":{Hello {PlayerName}...|} What do you want?
+    - Friendliness == "High":{Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
+}<>" they say.
 
 + [buy] -> buy
 + [sell] -> sell
@@ -137,7 +137,7 @@ You tell a joke:
     - Bantering == "Jokes Appreciated": They laugh heartily. #friendliness:0.1
     - Bantering == "Jokes Insulting": They frown at you. #friendliness:-0.1
     - Bantering == "Insults Appreciated": "Not my kind of humor," they say.
-    - Bantering == "Insults Insulting": "Meh, heard better," They say.
+    - else: They smile and nod a little. You change the subject.
 }
 -> talk
 
@@ -147,7 +147,7 @@ You give them a good ribbing.
     - Bantering == "Insults Appreciated": They laugh heartily.  #friendliness:0.1
     - Bantering == "Insults Insulting": They frown at you. #friendliness:-0.1
     - Bantering == "Jokes Appreciated": "Not my kind of humor," they say.
-    - Bantering == "Jokes Insulting": "Meh, heard better," They say.
+    - else: They smile a little and raise an eyebrow. You change the subject.
 }
 -> talk
 
