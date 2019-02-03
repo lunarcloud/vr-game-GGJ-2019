@@ -1,10 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System;
 using System.Linq;
 
 public class ShipMenu : MonoBehaviour
@@ -38,7 +36,9 @@ public class ShipMenu : MonoBehaviour
     private GameObject PricesListParent;
 
     public GameObject[] KidsDrawings;
-    
+
+    public VendorPricesViewer pricesViewer;
+
     private void Awake()
     {
         DataManager = FindObjectOfType<GameDataManager>();
@@ -94,21 +94,7 @@ public class ShipMenu : MonoBehaviour
             + $"\nStar Temperature: {data.StarTemperature} °K"
             ;
 
-        
-        // Clear List, then build
-        foreach (Transform child in PricesListParent.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-
-        var buyPrices = data.BuyPrices;
-        var sellPrices = data.SellPrices;
-        foreach (var resource in ResourceType.Types)
-        {
-            var buyPrice = buyPrices[resource];
-            var sellPrice = sellPrices[resource];
-            AddPriceItem($" {resource.Name} : $ {(buyPrice / 100)}.{(buyPrice % 100):00} / $ {(sellPrice / 100)}.{(sellPrice % 100):00}");
-        }
+        pricesViewer.Load(selectedPlanet);
 
         PlanetPreview.SetActive(true);
 
@@ -130,14 +116,7 @@ public class ShipMenu : MonoBehaviour
             eventSystem.firstSelectedGameObject = choice.gameObject;
         }
     }
-
-    private void AddPriceItem(string text)
-    {
-        Text item = Instantiate(PriceItemPrefab) as Text;
-        item.text = text;
-        item.transform.SetParent(PricesListParent.transform, false);
-    }
-
+    
     public void Travel() {
 
         if (selectedPlanet == null) return;

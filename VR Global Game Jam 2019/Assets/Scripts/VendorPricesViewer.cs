@@ -18,22 +18,22 @@ public class VendorPricesViewer : MonoBehaviour
     private GameObject PricesListParent;
 
     private PlanetData selectedPlanet;
-
-    private void Start()
+    
+    private void Awake()
     {
         DataManager = FindObjectOfType<GameDataManager>();
-        if (DataManager.Game.Player.Location != null)
-            LoadPlanetData(DataManager.Game.Player.Location);
+        Load(DataManager.Game.Player.Location);
     }
 
-    public void LoadPlanetData(PlanetData data) {
-        selectedPlanet = data;
-        ReloadPlanetData();
+    public void Reload() {
+        Load(selectedPlanet);
     }
 
-    public void ReloadPlanetData()
+    public void Load(PlanetData planet)
     {
-        if (selectedPlanet == null) return;
+        if (planet == null) return;
+
+        selectedPlanet = planet;
 
         // Clear List, then build
         foreach (Transform child in PricesListParent.transform)
@@ -41,8 +41,8 @@ public class VendorPricesViewer : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        var buyPrices = selectedPlanet.BuyPrices;
-        var sellPrices = selectedPlanet.SellPrices;
+        var buyPrices = planet.BuyPrices;
+        var sellPrices = planet.SellPrices;
         foreach (var resource in ResourceType.Types)
         {
             var buyPrice = buyPrices[resource];

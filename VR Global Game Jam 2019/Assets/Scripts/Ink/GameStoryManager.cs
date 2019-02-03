@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using System;
 
 public class GameStoryManager : MonoBehaviour {
 
@@ -205,7 +201,7 @@ public class GameStoryManager : MonoBehaviour {
         {
             FriendlinessText.text += "❤️";
         }
-        pricesViewer.ReloadPlanetData();
+        pricesViewer.Reload();
     }
 
     private void updateFriendliness(float value)
