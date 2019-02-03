@@ -22,7 +22,7 @@ VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciat
     - Friendliness == "Low":{Hello {PlayerName}...|} What do you want?
     - Friendliness == "High":{Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
     - else:{Hello {PlayerName}, welcome.|} How can I help you?
-}<>" they say.
+}<>" they say. #inventoryShow
 
 + [buy] -> buy
 + [sell] -> sell
@@ -71,7 +71,7 @@ How Much? #numpadShow
 -> Main
 
 == talk ==
-What do you talk about?
+What do you talk about? #inventoryHide
  * [Pray]
  -> Praise
  * [Family]
@@ -119,12 +119,13 @@ What do you talk about?
  + [Accept]
     {
         - Family == "Offer and Accept Visit": "Wonderful! They can't wait. It'll be great," they say. #friendliness:0.1
-        - Family == "Offer and Refuse Visit": They frown, you don't refuse a visit in this culture. #friendliness:-0.1
+        - Family == "Offer and Refuse Visit": They frown, you've broken the social norm of politely declining. #friendliness:-0.1
     }
  + [Refuse]
     {
-        - Family == "Offer and Accept Visit": They frown, you've broken the social norm of politely declining. #friendliness:-0.1
+        - Family == "Offer and Accept Visit": They frown, feeling you've rejected a warm offer. #friendliness:-0.1
         - Family == "Offer and Refuse Visit": They smile. "Well, maybe next time"  #friendliness:0.1
+        They always say that, it's a thing on this planet. You smile back.
     }
 - -> talk
 

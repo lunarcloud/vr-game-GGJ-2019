@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class GameStoryManager : MonoBehaviour {
 
@@ -106,11 +107,23 @@ public class GameStoryManager : MonoBehaviour {
 
         inkManager.AddTagProcessor("numpadShow", delegate (string[] values) { NumpadShow(); });
         inkManager.AddTagProcessor("numpadHide", delegate (string[] values) { NumpadHide(); });
+        inkManager.AddTagProcessor("inventoryShow", delegate (string[] values) { InventoryShow(); });
+        inkManager.AddTagProcessor("inventoryHide", delegate (string[] values) { InventoryHide(); });
 
         if (GvrMode.IsDaydream)
         {
             daydreamNumpadDelegate.KeyboardEnterPressed += (s, e) => { NumpadValueAccepted(); };
         }
+    }
+
+    private void InventoryHide()
+    {
+        inventoryCanvas.SetActive(false);
+    }
+
+    private void InventoryShow()
+    {
+        inventoryCanvas.SetActive(true);
     }
 
     private void Start()
@@ -124,7 +137,6 @@ public class GameStoryManager : MonoBehaviour {
         numpadText.text = "";
         dialogCanvas.SetActive(false);
         numpadCanvas.SetActive(true);
-        inventoryCanvas.SetActive(true);
         if (GvrMode.IsDaydream)
         {
             daydreamNumpad.ClearText();
@@ -147,7 +159,6 @@ public class GameStoryManager : MonoBehaviour {
     {
         numpadText.text = "";
         numpadCanvas.SetActive(false);
-        inventoryCanvas.SetActive(false);
 
         if (GvrMode.IsDaydream)
         {
