@@ -57,11 +57,11 @@ What are you buying?
 "How Much?" #numpadShow
 [buying...] #buy
 { - CancelTrade: -> Main } #numpadHide
-"<>{
-    - Friendliness == "Low":{SuccessfulBuy :Yeah, sure. That'll do,|What are you trying to pull here? }
-    - Friendliness == "High":{SuccessfulBuy :Wonderful doing business,|I'd love to give you that kind of deal, but I can't, }
-    - else:{SuccessfulBuy :Good deal,|Sorry, not enough money for that, }
-}<>" they say #numpadHide
+<>"<>{
+    - Friendliness == "Low":{SuccessfulBuy :Yeah, sure. That'll do,|What are you trying to pull here?}
+    - Friendliness == "High":{SuccessfulBuy :Wonderful doing business,|I'd love to give you that kind of deal, but I can't,}
+    - else:{SuccessfulBuy :Good deal,|Sorry, not enough money for that,}
+}<>" they say. #numpadHide
 ~ HasTraded = true
 -> Main
 
@@ -75,7 +75,7 @@ What are you selling?
 How Much? #numpadShow
 [selling...] #sell
 { - CancelTrade: -> Main } #numpadHide
-{
+<>"<>{
     - Friendliness == "Low":{SuccessfulSell :Yeah, sure. I'll buy,|What are you trying to pull? You don't have that much!}
     - Friendliness == "High":{SuccessfulSell :Wonderful doing business, as always,|I'd buy that much if you had that much,}
     - else:{SuccessfulSell :Good deal,|Sorry, you don't seem to have that many,}
@@ -183,5 +183,5 @@ You give them a good ribbing.
     - Friendliness == "Low":Get outta here, swindler.
     - Friendliness == "High":Don't be a stranger. Say hi to your crew for me.
     - else:Nice doing business with you.
-}<>"
+}<>" they say.
 -> DONE
