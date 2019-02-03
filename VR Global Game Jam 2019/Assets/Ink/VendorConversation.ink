@@ -6,22 +6,23 @@ VAR PlayerName = "Bob"
 
 VAR TalkingAboutResource = "Water"
 VAR AmountFor = "Sell"
-VAR NumpadValue = 0
+VAR CancelTrade = false
 VAR SuccessfulBuy = true
 VAR SuccessfulSell = false
+VAR SecondChancePrayer = false
 
 VAR HasTraded = false
 
 VAR Friendliness = "Normal" //, Low, High
-VAR Religion = "Not Discussed" //, None, Praise Before Trading, Praise After Trading
+VAR Religion = "Praise After Trading" //, None, Praise Before Trading, Praise After Trading, Not Discussed
 VAR Family = "Offer and Accept Visit" //, None, Offer and Refuse Visit, Not Discussed
 VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciated, Insults Insulting
 
 == Main ==
 "<>{
-    - Friendliness == "Low":{Hello {PlayerName}...|} What do you want?
-    - Friendliness == "High":{Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
-    - else:{Hello {PlayerName}, welcome.|} How can I help you?
+    - Friendliness == "Low":{Hello {PlayerName}... |}What do you want?
+    - Friendliness == "High":{Hello {PlayerName}, it's good to see you. |}What would you like to talk about?
+    - else:{Hello {PlayerName}, welcome. |}How can I help you?
 }<>" they say. #inventoryShow
 
 + [buy] -> buy
@@ -55,7 +56,13 @@ What are you buying?
 
 "How Much?" #numpadShow
 [buying...] #buy
-{SuccessfulBuy : Awesome | Sorry, not enough money for that. } #numpadHide
+{ - CancelTrade: -> Main } #numpadHide
+"<>{
+    - Friendliness == "Low":{SuccessfulBuy :Yeah, sure. That'll do,|What are you trying to pull here? }
+    - Friendliness == "High":{SuccessfulBuy :Wonderful doing business,|I'd love to give you that kind of deal, but I can't, }
+    - else:{SuccessfulBuy :Good deal,|Sorry, not enough money for that, }
+}<>" they say #numpadHide
+~ HasTraded = true
 -> Main
 
 == sell ==
@@ -67,13 +74,21 @@ What are you selling?
 = SelectAmountSell
 How Much? #numpadShow
 [selling...] #sell
-{SuccessfulBuy : Awesome | Sorry, you don't have that many. } #numpadHide
+{ - CancelTrade: -> Main } #numpadHide
+{
+    - Friendliness == "Low":{SuccessfulSell :Yeah, sure. I'll buy,|What are you trying to pull? You don't have that much!}
+    - Friendliness == "High":{SuccessfulSell :Wonderful doing business, as always,|I'd buy that much if you had that much,}
+    - else:{SuccessfulSell :Good deal,|Sorry, you don't seem to have that many,}
+}<>" they say #numpadHide
+~ HasTraded = true
 -> Main
 
 == talk ==
 What do you talk about? #inventoryHide
  * [Pray]
  -> Praise
+ * {SecondChancePrayer} [Pray]
+ -> PraiseAgain
  * [Family]
  -> Home
  * [Joke]
@@ -89,14 +104,23 @@ What do you talk about? #inventoryHide
     - Religion == "Praise Before Trading": 
     {
         - HasTraded == false :  You two say a quick prayer. #friendliness:0.1
-        - HasTraded == true :  You go to pray, but they remind you not to do so before business. #friendliness:-0.1
+        - HasTraded == true :  You go to pray, but they remind you not to do so after business. #friendliness:-0.1
     }
     - Religion == "Praise After Trading": 
     {
         - HasTraded == true :  You two say a quick prayer. #friendliness:0.1
         - HasTraded == false :  You go to pray, but they remind you not to do so before business. #friendliness:-0.1
+                            ~ SecondChancePrayer = true
     }
     - else: You say a quick prayer. They respectfully bow their head while you do so. 
+}
+-> talk
+
+= PraiseAgain
+{
+    - HasTraded == true :  You two say a quick prayer. #friendliness:0.1
+    "Much better," they say.
+    - HasTraded == false : "Now, you are just being disrespectful!" they exclaim. #friendliness:-0.1
 }
 -> talk
 
@@ -154,6 +178,7 @@ You give them a good ribbing.
 -> talk
 
 == Goodbyes ==
+~ SecondChancePrayer = false
 "<>{
     - Friendliness == "Low":Get outta here, swindler.
     - Friendliness == "High":Don't be a stranger. Say hi to your crew for me.

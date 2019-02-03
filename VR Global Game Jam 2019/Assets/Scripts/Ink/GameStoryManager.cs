@@ -50,7 +50,10 @@ public class GameStoryManager : MonoBehaviour {
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
             var resourceCost = DataManager.Game.Player.Location.BuyPrices[resource];
 
-            if (DataManager.Game.Player.Currency >= resourceCost * quantity)
+            inkManager.story.variablesState["CancelTrade"] = quantity == 0;
+
+            if (DataManager.Game.Player.Currency >= resourceCost * quantity
+                && quantity > 0)
             {
                 DataManager.Game.Player.Currency -= resourceCost * quantity;
                 if (DataManager.Game.Player.Inventory.ContainsKey(resource) == false)
@@ -78,8 +81,11 @@ public class GameStoryManager : MonoBehaviour {
             var resource = ResourceType.Types.First(r => r.Name == resourceName);
             var resourceCost = DataManager.Game.Player.Location.SellPrices[resource];
 
+            inkManager.story.variablesState["CancelTrade"] = quantity == 0;
+
             if (DataManager.Game.Player.Inventory.ContainsKey(resource)
-                && DataManager.Game.Player.Inventory[resource] >= quantity)
+                && DataManager.Game.Player.Inventory[resource] >= quantity
+                && quantity > 0)
             {
                 DataManager.Game.Player.Currency += resourceCost * quantity;
                 DataManager.Game.Player.Inventory[resource] -= quantity;
