@@ -14,14 +14,14 @@ VAR HasTraded = false
 
 VAR Friendliness = "Normal" //, Low, High
 VAR Religion = "Not Discussed" //, None, Praise Before Trading, Praise After Trading
-VAR Family = "Offer and Accept Visit" //, None, Offer and Accept Visit, Offer and Refuse Visit
+VAR Family = "Offer and Accept Visit" //, None, Offer and Refuse Visit, Not Discussed
 VAR Bantering = "Jokes Appreciated" //, None, Jokes Insulting, Insults Appreciated, Insults Insulting
 
 == Main ==
 "<>{
-    - Friendliness == "Normal":{Hello {PlayerName}, welcome.|} How can I help you?
     - Friendliness == "Low":{Hello {PlayerName}...|} What do you want?
     - Friendliness == "High":{Hello {PlayerName}, it's good to see you.|} What would you like to talk about?
+    - else:{Hello {PlayerName}, welcome.|} How can I help you?
 }<>" they say.
 
 + [buy] -> buy
@@ -85,7 +85,6 @@ What do you talk about?
 
 = Praise
 {
-    - Religion == "None": You say a quick prayer. They respectfully bow their head while you do so. 
     - Religion == "Not Discussed": You say a quick prayer, but it makes them uncomfortable to talk about such private things.  #friendliness:-0.1
     - Religion == "Praise Before Trading": 
     {
@@ -97,20 +96,22 @@ What do you talk about?
         - HasTraded == true :  You two say a quick prayer. #friendliness:0.1
         - HasTraded == false :  You go to pray, but they remind you not to do so before business. #friendliness:-0.1
     }
+    - else: You say a quick prayer. They respectfully bow their head while you do so. 
 }
 -> talk
 
 = Home
 "How's your family? Are you all well?" you ask.
-
 {
-    - Family == "None": 
-        "I don't like to discuss family with business partners," they say. #friendliness:-0.1
+    - Family == "Not Discussed": 
+        "Are you threatening me?" they say. You shift uncomfortably and change the subject. #friendliness:-0.1
         -> talk
     - Family == "Offer and Accept Visit": 
         -> HomeVisitOffer
     - Family == "Offer and Refuse Visit": 
         -> HomeVisitOffer
+    - else: "They're... uh... fine, I guess," they say.
+        -> talk
 }
 
 = HomeVisitOffer
@@ -153,8 +154,8 @@ You give them a good ribbing.
 
 == Goodbyes ==
 "<>{
-    - Friendliness == "Normal":Nice doing business with you.
     - Friendliness == "Low":Get outta here, swindler.
     - Friendliness == "High":Don't be a stranger. Say hi to your crew for me.
+    - else:Nice doing business with you.
 }<>"
 -> DONE
