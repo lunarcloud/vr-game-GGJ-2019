@@ -694,14 +694,14 @@ RectTransform:
   m_GameObject: {fileID: 132510096}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0119998, y: 1, z: 399.9999}
   m_Children: []
-  m_Father: {fileID: 919203305}
+  m_Father: {fileID: 1035069113}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -21.960005}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 33.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &132510098
@@ -726,18 +726,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 28
-    m_Alignment: 4
+    m_FontSize: 28
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 52
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Resources | Buy For | Sell For
+  m_Text: Resource     | Buy For       | Sell For
 --- !u!222 &132510099
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -787,6 +787,7 @@ MonoBehaviour:
   inventoryCanvas: {fileID: 1627762001}
   vendorManager: {fileID: 1137752150}
   inventoryViewer: {fileID: 1627762005}
+  pricesViewer: {fileID: 1035069118}
   FriendlinessText: {fileID: 1632917692}
 --- !u!114 &179012091
 MonoBehaviour:
@@ -910,7 +911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000025531147, y: -0.0031012462}
+  m_AnchoredPosition: {x: -0.0000025531147, y: -0.000460365}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &222717758
@@ -2771,19 +2772,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661170546}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0119998, y: 1, z: 399.9999}
   m_Children:
   - {fileID: 1072390192}
   - {fileID: 2080271997}
-  m_Father: {fileID: 919203305}
+  m_Father: {fileID: 1035069113}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -246.96002}
-  m_SizeDelta: {x: 500, y: 395.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661170548
 MonoBehaviour:
@@ -3891,67 +3892,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 4
   m_TargetDisplay: 0
---- !u!1 &919203304
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 919203305}
-  - component: {fileID: 919203306}
-  m_Layer: 0
-  m_Name: PriceListSection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &919203305
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919203304}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.012, y: 1, z: 399.99997}
-  m_Children:
-  - {fileID: 132510097}
-  - {fileID: 661170547}
-  m_Father: {fileID: 1035069113}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -225}
-  m_SizeDelta: {x: 500, y: 450}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &919203306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919203304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
 --- !u!1001 &922957166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4391,6 +4331,7 @@ GameObject:
   - component: {fileID: 1035069117}
   - component: {fileID: 1035069116}
   - component: {fileID: 1035069115}
+  - component: {fileID: 1035069118}
   - component: {fileID: 1035069114}
   m_Layer: 5
   m_Name: PricesCanvas
@@ -4398,7 +4339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1035069113
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4410,14 +4351,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0.576}
   m_LocalScale: {x: 0.001, y: 0.001, z: 1}
   m_Children:
-  - {fileID: 919203305}
+  - {fileID: 132510097}
+  - {fileID: 661170547}
   m_Father: {fileID: 1396402059}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 63.45, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.812, y: 1.562}
-  m_SizeDelta: {x: 500, y: 450}
+  m_AnchoredPosition: {x: 1.812, y: 1.528}
+  m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1035069114
 MonoBehaviour:
@@ -4428,7 +4370,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1035069112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -4436,12 +4378,12 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!114 &1035069115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4502,6 +4444,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!114 &1035069118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035069112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4430c2b17061ba4f867a00eae3e0c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PriceItemPrefab: {fileID: 8541670297027608911, guid: 6d48acc15ec03ce45b13bc13c9950e33,
+    type: 3}
+  PricesListParent: {fileID: 222717756}
 --- !u!1001 &1061512560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4922,7 +4879,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7499,8 +7456,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1242485362}
   m_HandleRect: {fileID: 1242485361}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999374
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

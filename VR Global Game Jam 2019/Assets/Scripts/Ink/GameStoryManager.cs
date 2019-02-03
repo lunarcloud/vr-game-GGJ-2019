@@ -25,6 +25,7 @@ public class GameStoryManager : MonoBehaviour {
     public VendorManager vendorManager;
 
     public ShipInventoryViewer inventoryViewer;
+    public VendorPricesViewer pricesViewer;
 
     private int ValueOfLastNumpad = 0;
 
@@ -204,6 +205,7 @@ public class GameStoryManager : MonoBehaviour {
         {
             FriendlinessText.text += "❤️";
         }
+        pricesViewer.ReloadPlanetData();
     }
 
     private void updateFriendliness(float value)
