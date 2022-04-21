@@ -1,9 +1,11 @@
-# vr-game-GGJ-2019
-VR Game for the Global Game Jam 2019
+# Homeworlds
+A VR Game for the Global Game Jam 2019, where you discover all the worlds people (cool looking aliens) call home, as you travel along the spaceship you call your home-away-from-home while you work your trader job.
 
-https://globalgamejam.org/2019/games/homeworlds
+Developed for the Google Daydream and Cardboard VR platforms using the Unity 3D game engine.
 
-Release at
-https://samsarette.itch.io/homeworlds
+## Links
+* Jam - https://globalgamejam.org/2019/games/homeworlds
+* Released - https://samsarette.itch.io/homeworlds
 
+## Screenshot
 ![screenshot](screenshot.png)
