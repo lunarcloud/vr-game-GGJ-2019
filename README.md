@@ -5,3 +5,5 @@ https://globalgamejam.org/2019/games/homeworlds
 
 Release at
 https://samsarette.itch.io/homeworlds
+
+![screenshot](screenshot.png)
